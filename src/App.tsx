@@ -1,26 +1,23 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import {Routes, Route} from "react-router-dom";
+import {Home} from "./pages";
+import {Login, LoginData, SignUp, SignUpData} from "./features/auth";
 
 function App() {
+  const onLoginSubmit = (data: LoginData) => {
+    console.log(data)
+  }
+
+  const onSignUpSubmit = (data: SignUpData) => {
+    console.log(data)
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+     <Routes>
+       <Route path="/" element={<Home/>}/>
+       <Route path="/auth/login" element={<Login onSubmit={onLoginSubmit}/>}/>
+       <Route path="/auth/signup" element={<SignUp onSubmit={onSignUpSubmit}/>}/>
+     </Routes>
+  )
 }
 
-export default App;
+export default App
