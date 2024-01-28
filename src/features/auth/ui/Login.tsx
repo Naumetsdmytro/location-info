@@ -56,7 +56,7 @@ export const Login = () => {
   }
 
   const onGoogleLogin = (): void => {
-    console.log('google login')
+
   }
 
   const onFacebookLogin = (): void => {
