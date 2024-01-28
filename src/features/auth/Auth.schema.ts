@@ -18,10 +18,15 @@ export const LoginSchema = yup.object().shape({
 })
 
 export const SignUpSchema = yup.object().shape({
-  [Fields.name]: yup.string()
+  [Fields.firstName]: yup.string()
      .required(errorMessages.required)
-     .min(2, errorMessages.min)
      .max(255, errorMessages.max)
+     .min(2, errorMessages.min)
+     .trim(),
+  [Fields.lastName]: yup.string()
+     .required(errorMessages.required)
+     .max(255, errorMessages.max)
+     .min(2, errorMessages.min)
      .trim(),
   [Fields.email]: yup.string()
      .required(errorMessages.required)

@@ -1,3 +1,4 @@
 export { Login } from "./ui/Login";
-export { SignUp } from "./ui/SignUp";
-export type { LoginData, SignUpData } from "./model/models";
+export { Register } from "./ui/Register";
+export type { LoginData, RegisterData } from "./model/models";
+export { useAuthContext } from "./context/AuthContext";

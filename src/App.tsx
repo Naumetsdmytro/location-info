@@ -1,23 +1,17 @@
-import {Routes, Route} from "react-router-dom";
-import {Home} from "./pages";
-import {Login, LoginData, SignUp, SignUpData} from "./features/auth";
+import { useRoutes } from './proccess/routes'
+import { AuthContext } from './features/auth/context/AuthContext'
+import { useAuth } from './features/auth/hooks/useAuth'
 
-function App() {
-  const onLoginSubmit = (data: LoginData) => {
-    console.log(data)
-  }
-
-  const onSignUpSubmit = (data: SignUpData) => {
-    console.log(data)
-  }
+const App = () => {
+  const { token, user, logout, login } = useAuth()
+  const isAuthenticated = !!token
+  const routes = useRoutes(isAuthenticated)
 
   return (
-     <Routes>
-       <Route path="/" element={<Home/>}/>
-       <Route path="/auth/login" element={<Login onSubmit={onLoginSubmit}/>}/>
-       <Route path="/auth/signup" element={<SignUp onSubmit={onSignUpSubmit}/>}/>
-     </Routes>
+    <AuthContext.Provider value={{ token, user: { email: '', fullName: '' }, logout, login, isAuthenticated }}>
+      {routes}
+    </AuthContext.Provider>
   )
 }
 
-export default App
+export default App;

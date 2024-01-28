@@ -8,8 +8,10 @@ export const getErrorMessage = (fields: Fields, errors: any) => {
       return errors.password?.message
     case Fields.confirmPassword:
       return errors.confirmPassword?.message
-    case Fields.name:
-      return errors.name?.message
+    case Fields.firstName:
+      return errors.firstName?.message
+    case Fields.lastName:
+      return errors.lastName?.message
 
     default:
       return ''

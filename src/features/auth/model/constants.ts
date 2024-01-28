@@ -1,19 +1,22 @@
 export enum Fields {
-  name = 'name',
+  firstName = 'firstName',
+  lastName = 'lastName',
   email = 'email',
   password = 'password',
   confirmPassword = 'confirmPassword'
 }
 
 export const FORM_LABELS = {
-  [Fields.name]: 'Name',
+  [Fields.firstName]: 'First Name',
+  [Fields.lastName]: 'Last Name',
   [Fields.email]: 'Email',
   [Fields.password]: 'Password',
   [Fields.confirmPassword]: 'Confirm Password'
 }
 
 export const initialValues = {
-  [Fields.name]: '',
+  [Fields.firstName]: '',
+  [Fields.lastName]: '',
   [Fields.email]: '',
   [Fields.password]: '',
   [Fields.confirmPassword]: ''
