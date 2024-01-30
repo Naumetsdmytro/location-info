@@ -10,3 +10,11 @@ export interface RegisterData {
   password: string
   confirmPassword: string
 }
+
+export interface PlaceData {
+  title: string,
+  id: string,
+  address: {
+    label: string
+  }
+}
