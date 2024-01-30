@@ -1,8 +1,7 @@
-import { useEffect } from 'react'
 import { Box, Typography, Stack, Grid } from '@mui/material'
 import mainImage from './assets/main.jpg'
 import { SearchBtn } from '../shared'
-import { Category } from '../entities/category/Category'
+import { SectionList } from '../entities/category'
 
 export const Main = () => {
   return (
@@ -43,7 +42,7 @@ export const Main = () => {
           <SearchBtn />
         </Stack>
       </Grid>
-      <Category />
+      <SectionList />
     </Box>
   )
 }
