@@ -3,7 +3,6 @@ import {Disclosure, Menu, Transition} from '@headlessui/react'
 import {useAuthContext} from '../../features/auth'
 import {Link, useLocation, useNavigate} from 'react-router-dom'
 import {getItemFromStorage} from "../../shared";
-import {SearchButton} from "../../shared/SearchButton";
 
 interface Props {
   children: React.ReactNode
@@ -33,13 +32,13 @@ export const NavLayout = ({children}: Props) => {
 
   return (
      <>
-       <Disclosure as="nav">
+       <Disclosure as="nav" className='bg-transparent absolute w-full'>
          <>
            <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
              <div className="relative flex h-16 items-center justify-between">
                <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
                  <div className="flex flex-shrink-0 items-center">
-                   <span className="text-black font-bold text-xl">Logo</span>
+                   <span className="text-black font-bold text-xl">Location-info</span>
                  </div>
                  {isAuthenticated && <div className="hidden sm:ml-6 sm:block">
                    <div className="flex space-x-4">
@@ -61,7 +60,6 @@ export const NavLayout = ({children}: Props) => {
                </div>
                {isAuthenticated ? (<div
                   className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-                 <SearchButton />
                  <Menu as="div" className="relative ml-3">
                    <Menu.Button
                       className="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
