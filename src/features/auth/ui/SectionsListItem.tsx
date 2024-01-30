@@ -9,9 +9,9 @@ interface Props {
 
 
 export const SectionListItem = ({text, icon}: Props) => {
-    return (
+  return (
     <Grid item xs={12} sm={6} md={4} lg={3}>
-            <Link to={text.toLowerCase()}>
+      <Link to={text.toLowerCase()}>
         <Paper
           elevation={3}
           sx={{
@@ -28,7 +28,7 @@ export const SectionListItem = ({text, icon}: Props) => {
           {icon}
           <Typography variant="subtitle1">{text}</Typography>
         </Paper>
-        </Link>
-      </Grid>
-        )
+      </Link>
+    </Grid>
+  )
 }

@@ -8,7 +8,6 @@ import { FORM_LABELS } from '../model/constants'
 import { getErrorMessage } from '../lib/getError'
 import { LoginData } from '../model/models'
 import { ToastContainer } from 'react-toastify'
-import { notifySuccess } from '../../../shared'
 import { useRequest } from '../hooks/useRequest'
 import { useEffect } from 'react'
 import { notifyError } from '../../../shared'
@@ -45,12 +44,12 @@ export const Login = () => {
         '/auth/login',
         'POST',
         { email: data.email, password: data.password },
-        {}
+        {},
       )
       auth.login(response.token, response.user)
       navigate('/main')
     } catch (e: any) {
-      notifyError(e)
+      notifyError(e.message)
       console.log(e)
     }
   }
@@ -128,7 +127,7 @@ export const Login = () => {
 
           <div className="flex flex-col items-center justify-around w-[300px]">
             <Button
-              variant="outlined" 
+              variant="outlined"
               color="primary"
               fullWidth
               className="mb-4 h-14"

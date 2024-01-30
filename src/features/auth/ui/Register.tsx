@@ -42,7 +42,6 @@ export const Register = () => {
         notifySuccess('Success sign up')
       }
     } catch (e: any) {
-      notifyError(e)
       console.log(e)
     }
   }
