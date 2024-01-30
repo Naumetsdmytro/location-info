@@ -4,6 +4,7 @@ import { Login } from '../features/auth'
 import { Register } from '../features/auth'
 import { NavLayout } from '../pages/layout/NavLayout'
 import { Error404 } from '../shared'
+import { Category } from '../pages'
 
 export const useRoutes = (isAuthenticated: boolean) => {
   if (isAuthenticated) {
@@ -11,6 +12,7 @@ export const useRoutes = (isAuthenticated: boolean) => {
       <NavLayout>
         <Routes>
           <Route path="/main" element={<Main />} />
+          <Route path="/main/:categoryName" element={<Category />} />
           <Route path='*' element={<Error404 />} />
         </Routes>
       </NavLayout>
