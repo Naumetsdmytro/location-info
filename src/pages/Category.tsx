@@ -1,7 +1,8 @@
 import {useEffect, useState} from "react";
 import { useParams } from "react-router";
-
-import { PlaceData } from "../features/auth/model/models";
+import { Box, Typography } from '@mui/material';
+import { useSpring, animated } from 'react-spring';
+import { PlaceData } from './model/models'
 
 const api = 'l3X3aMFHj6CBqM97uul8SNcYiwOhwBqmgWJUIsTmAVI'
 
@@ -25,16 +26,25 @@ export const Category = () => {
     fetchPlaces();
   }, []);
 
+  const fade = useSpring({
+    from: { opacity: 0 },
+    to: { opacity: 1 },
+    delay: 500,
+  });
+
   return (
-    <div>
-      <ul>
-        {places.map(place => {
-          return <li style={{marginBottom: "20px"}}>
-            <h3 key={place.id}>{place.title}</h3>
-            <p>{place.address.label}</p>
-          </li>
-        })}
-      </ul>
-    </div>
-  )
-}
+    <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', m: 2 }}>
+      <Typography variant="h4" component="h2" gutterBottom>
+        {categoryName}
+      </Typography>
+      <animated.ul style={fade}>
+        {places && places.map(place => (
+          <Box key={place.id} sx={{ my: 1, p: 2, border: '1px solid #ddd', borderRadius: '4px', width: '100%' }}>
+            <Typography variant="h6">{place.title}</Typography>
+            <Typography variant="body2">{place.address.label}</Typography>
+          </Box>
+        ))}
+      </animated.ul>
+    </Box>
+  );
+};

@@ -15,11 +15,11 @@ export const useAuth = () => {
   const [user, setUser] = useState({})
 
   const login = useCallback((jwtToken: string, user: IUser) => {
-      setToken(jwtToken)
-      setUser(user)
+    setToken(jwtToken)
+    setUser(user)
 
-      setItemToStorage('userData', { token: jwtToken, user: user })
-    }, [])
+    setItemToStorage('userData', { token: jwtToken, user: user })
+  }, [])
 
   const logout = () => {
     setToken(null)
@@ -30,10 +30,10 @@ export const useAuth = () => {
 
   useEffect(() => {
     const userData = getItemFromStorage('userData')
-    
+
     if (userData) {
       const { token, user } = userData
-  
+
       if (token && user) {
         try {
           login(token, user)
@@ -43,6 +43,6 @@ export const useAuth = () => {
       }
     }
   }, [login])
-  
+
   return { login, logout, token, user }
 }
