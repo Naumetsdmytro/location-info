@@ -2,8 +2,34 @@ import { Box, Typography, Stack, Grid } from '@mui/material'
 import mainImage from './assets/main.jpg'
 import { SearchBtn } from '../shared'
 import { SectionList } from '../entities/category'
+import { Footer } from '../shared'
+import { useSpring, animated } from 'react-spring'
+import { useInView } from 'react-intersection-observer'
 
 export const Main = () => {
+  const [footerRef, inFooterView] = useInView({
+    triggerOnce: true,
+  })
+  const [sectionRef, inSectionView] = useInView({
+    triggerOnce: true,
+  })
+
+  const footerFadeProps = useSpring({
+    opacity: inFooterView ? 1 : 0,
+    transform: inFooterView ? 'translateY(0)' : 'translateY(20px)',
+    config: {
+      duration: 1000,
+    },
+  })
+
+  const sectionFadeProps = useSpring({
+    opacity: inSectionView ? 1 : 0,
+    transform: inSectionView ? 'translateY(0)' : 'translateY(20px)',
+    config: {
+      duration: 1000,
+    },
+  })
+
   return (
     <Box component={'div'} sx={{ display: 'flex', flexDirection: 'column', height: '100vh' }}>
       <img
@@ -42,9 +68,12 @@ export const Main = () => {
           <SearchBtn />
         </Stack>
       </Grid>
-      <SectionList />
+      <animated.div ref={sectionRef} style={sectionFadeProps}>
+        <SectionList />
+      </animated.div>
+      <animated.div ref={footerRef} style={footerFadeProps}>
+        <Footer />
+      </animated.div>
     </Box>
   )
 }
-
-// Compare
