@@ -8,14 +8,9 @@ import TwitterIcon from '@mui/icons-material/Twitter';
 import { Link } from 'react-router-dom';
 
 export const Footer = () => {
-  const [clicked, setClicked] = useState(false)
   const [email, setEmail] = useState('')
   const [name, setName] = useState('')
-
-  const handleClick = () => {
-    setClicked(true)
-  }
-
+  
   const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setName(event.target.value)
   }
@@ -125,8 +120,7 @@ export const Footer = () => {
               <Typography variant={'body1'} sx={{ color: 'rgba(0, 0, 0, .5)', marginBottom: '5px', fontWeight: 100 }}>
                 Return Policy
               </Typography>
-              <Typography variant={'body1'} sx={{ color
-                : 'rgba(0, 0, 0, .5)', marginBottom: '5px', fontWeight: 100 }}>
+              <Typography variant={'body1'} sx={{ color: 'rgba(0, 0, 0, .5)', marginBottom: '5px', fontWeight: 100 }}>
                 Terms Of Use
               </Typography>
               <Typography variant={'body1'} sx={{ color: 'rgba(0, 0, 0, .5)', marginBottom: '5px', fontWeight: 100 }}>
@@ -160,7 +154,7 @@ export const Footer = () => {
                   <TwitterIcon />
                 </Button>
               </Link>
-              <Link to='https://www.linkedin.com/in/andrii-chykulai/'>
+              <Link to='https://www.linkedin.com/in/andrii-chykulai'>
                 <Button
                   variant="contained"
                   style={{ backgroundColor: '#0e76a8', color: 'white', height: '55px', width: '55px' }}
