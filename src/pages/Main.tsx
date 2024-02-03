@@ -6,11 +6,15 @@ import { Footer } from '../shared'
 import { useSpring, animated } from 'react-spring'
 import { useInView } from 'react-intersection-observer'
 import { Feedback } from '../shared'
+import { useTheme } from '../shared/hooks/useTheme'
 
 export const Main = () => {
+  const { isDark } = useTheme()
+
   const [footerRef, inFooterView] = useInView({
     triggerOnce: true,
   })
+  
   const [sectionRef, inSectionView] = useInView({
     triggerOnce: true,
   })
@@ -32,7 +36,7 @@ export const Main = () => {
   })
 
   return (
-    <Box component={'div'} sx={{ display: 'flex', flexDirection: 'column', height: '100vh' }}>
+    <Box component={'div'} sx={{ display: 'flex', flexDirection: 'column', height: '100vh', backgroundColor: isDark ? '#000000' : '#ffffff' }}>
       <img
         src={mainImage}
         alt="main-page"
@@ -53,16 +57,16 @@ export const Main = () => {
       >
         <Stack component={'div'} spacing={2} sx={{
           border: '2px solid #4d4d4d',
-          backgroundColor: 'rgba(150, 150, 150, 0.4)',
+          backgroundColor: isDark ? 'rgba(150, 150, 150, 0.4)' : 'rgba(255, 255, 255, 0.4)',
           borderRadius: '10px',
           padding: '10px',
           marginBottom: '20px',
         }}>
-          <Typography variant={'h2'} sx={{ color: 'rgba(1, 1, 1, 0.7)' }}>
-            <span style={{ color: '#5a67d8' }}>Search</span> any places near you
+          <Typography variant={'h2'} sx={{ color: isDark ? 'rgba(1, 1, 1, 0.7)' : 'rgba(255, 255, 255, 0.7)' }}>
+            <span style={{ color: '#5a67d8' }}>Search</span> any place near you
           </Typography>
         </Stack>
-        <Typography variant={'h3'} sx={{ color: 'rgba(0, 100, 0)', marginBottom: '10px' }}>
+        <Typography variant={'h3'} sx={{ color: isDark ? 'rgba(0, 100, 0)' : 'rgba(255, 255, 255)' , marginBottom: '10px' }}>
           Find the best <span style={{ color: '#023e8a' }}>places</span> in your city
         </Typography>
         <Stack component={'div'} spacing={2}>
