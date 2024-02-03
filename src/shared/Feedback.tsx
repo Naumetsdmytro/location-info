@@ -11,6 +11,8 @@ import { useState } from 'react'
 import MailOutlineIcon from '@mui/icons-material/MailOutline'
 import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
 import { useSpring, animated } from 'react-spring'
+import { notifySuccess } from './notifySuccess';
+import { ToastContainer } from 'react-toastify';
 
 export const Feedback = () => {
   const [clicked, setClicked] = useState(false)
@@ -37,6 +39,10 @@ export const Feedback = () => {
     },
   })
 
+  const onSubmit = () => {
+    notifySuccess('Your message has been sent!')
+  }
+
   return (
     <Box
       component="div"
@@ -61,16 +67,16 @@ export const Feedback = () => {
         </Typography>
         <Typography
           variant={'h6'}
-          sx={{ color: 'rgba(0, 0, 0, .5)', fontWeight: 100 }}
+          sx={{ color: 'rgba(0, 0, 0, .7)', fontWeight: 100 }}
         >
-          WE WOULD LOVE TO HEAR FROM YOU
+          WE WOULD ❤️ LOVE TO HEAR FROM 🫵 
         </Typography>
         <Button
           variant="contained"
           sx={{ backgroundColor: '#5a67d8', color: 'white' }}
           onClick={handleClick}
         >
-          CONTACT US
+          CONTACT US 
         </Button>
       </Stack>
       {clicked && (
@@ -133,15 +139,14 @@ export const Feedback = () => {
                 height: '55px',
                 width: '200px',
               }}
-              onClick={() => {
-                console.log('send')
-              }}
+              onClick={onSubmit}
             >
               Send
             </Button>
           </Stack>
         </animated.div>
       )}
+      <ToastContainer />
     </Box>
   )
 }

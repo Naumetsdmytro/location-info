@@ -1,16 +1,30 @@
-import { Box, Grid, Stack, Typography, Button, Divider, TextField, InputAdornment, IconButton } from '@mui/material'
+import {
+  Box,
+  Grid,
+  Stack,
+  Typography,
+  Button,
+  Divider,
+  TextField,
+  InputAdornment,
+  IconButton,
+} from '@mui/material'
 import { useState } from 'react'
-import MailOutlineIcon from '@mui/icons-material/MailOutline';
-import PersonIcon from '@mui/icons-material/Person';
-import GitHubIcon from '@mui/icons-material/GitHub';
-import LinkedInIcon from '@mui/icons-material/LinkedIn';
-import TwitterIcon from '@mui/icons-material/Twitter';
-import { Link } from 'react-router-dom';
+import MailOutlineIcon from '@mui/icons-material/MailOutline'
+import PersonIcon from '@mui/icons-material/Person'
+import GitHubIcon from '@mui/icons-material/GitHub'
+import LinkedInIcon from '@mui/icons-material/LinkedIn'
+import TwitterIcon from '@mui/icons-material/Twitter'
+import { Link } from 'react-router-dom'
+import DarkModeIcon from '@mui/icons-material/DarkMode'
+import LightModeIcon from '@mui/icons-material/LightMode'
+import { useTheme } from './hooks/useTheme'
 
 export const Footer = () => {
   const [email, setEmail] = useState('')
   const [name, setName] = useState('')
-  
+  const { isDark, toggleTheme } = useTheme()
+
   const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setName(event.target.value)
   }
@@ -20,13 +34,28 @@ export const Footer = () => {
   }
 
   return (
-    <Box component="div" sx={{ paddingX: '100px', paddingTop: '100px', paddingBottom: '30px' }}>
+    <Box
+      component="div"
+      sx={{ paddingX: '100px', paddingTop: '100px', paddingBottom: '30px' }}
+    >
       <Grid container spacing={8}>
         <Grid item xs={6} md={12}>
           <Divider />
-          <Stack direction="row" spacing={2} justifyContent="space-between" alignItems="center"
-                 sx={{ paddingY: '60px' }}>
-            <Typography variant={'h6'} sx={{ color: 'rgba(0, 0, 0, .5)', marginBottom: '5px', fontWeight: 100 }}>
+          <Stack
+            direction="row"
+            spacing={2}
+            justifyContent="space-between"
+            alignItems="center"
+            sx={{ paddingY: '60px' }}
+          >
+            <Typography
+              variant={'h6'}
+              sx={{
+                color: 'rgba(0, 0, 0, .5)',
+                marginBottom: '5px',
+                fontWeight: 100,
+              }}
+            >
               NEWSLETTER
             </Typography>
             <Stack direction="row" alignItems="center">
@@ -74,8 +103,15 @@ export const Footer = () => {
               />
               <Button
                 variant="contained"
-                style={{ backgroundColor: '#5a67d8', color: 'white', height: '55px', width: '200px' }}
-                onClick={() => {console.log('subscribe')}}
+                style={{
+                  backgroundColor: '#5a67d8',
+                  color: 'white',
+                  height: '55px',
+                  width: '200px',
+                }}
+                onClick={() => {
+                  console.log('subscribe')
+                }}
               >
                 Subscribe
               </Button>
@@ -84,46 +120,135 @@ export const Footer = () => {
           <Divider />
         </Grid>
         <Grid item xs={6} md={12}>
-          <Stack direction='row' spacing={2} justifyContent="space-between" alignItems="center">
+          <Stack
+            direction="row"
+            spacing={2}
+            justifyContent="space-between"
+            alignItems="center"
+          >
             <Stack direction="column" spacing={2}>
-              <Typography variant={'h6'} sx={{ color: 'rgba(0, 0, 0, .5)', marginBottom: '5px', fontWeight: 100 }}>
+              <Typography
+                variant={'h6'}
+                sx={{
+                  color: 'rgba(0, 0, 0, .5)',
+                  marginBottom: '5px',
+                  fontWeight: 100,
+                }}
+              >
                 ABOUT
               </Typography>
-              <Typography variant={'body1'} sx={{ color: 'rgba(0, 0, 0, .5)', marginBottom: '5px', fontWeight: 100 }}>
+              <Typography
+                variant={'body1'}
+                sx={{
+                  color: 'rgba(0, 0, 0, .5)',
+                  marginBottom: '5px',
+                  fontWeight: 100,
+                }}
+              >
                 About Us
               </Typography>
-              <Typography variant={'body1'} sx={{ color: 'rgba(0, 0, 0, .5)', marginBottom: '5px', fontWeight: 100 }}>
+              <Typography
+                variant={'body1'}
+                sx={{
+                  color: 'rgba(0, 0, 0, .5)',
+                  marginBottom: '5px',
+                  fontWeight: 100,
+                }}
+              >
                 Contact Us
               </Typography>
-              <Typography variant={'body1'} sx={{ color: 'rgba(0, 0, 0, .5)', marginBottom: '5px', fontWeight: 100 }}>
+              <Typography
+                variant={'body1'}
+                sx={{
+                  color: 'rgba(0, 0, 0, .5)',
+                  marginBottom: '5px',
+                  fontWeight: 100,
+                }}
+              >
                 Careers
               </Typography>
             </Stack>
             <Stack direction="column" spacing={2}>
-              <Typography variant={'h6'} sx={{ color: 'rgba(0, 0, 0, .5)', marginBottom: '5px', fontWeight: 100 }}>
+              <Typography
+                variant={'h6'}
+                sx={{
+                  color: 'rgba(0, 0, 0, .5)',
+                  marginBottom: '5px',
+                  fontWeight: 100,
+                }}
+              >
                 HELP
               </Typography>
-              <Typography variant={'body1'} sx={{ color: 'rgba(0, 0, 0, .5)', marginBottom: '5px', fontWeight: 100 }}>
+              <Typography
+                variant={'body1'}
+                sx={{
+                  color: 'rgba(0, 0, 0, .5)',
+                  marginBottom: '5px',
+                  fontWeight: 100,
+                }}
+              >
                 Payments
               </Typography>
-              <Typography variant={'body1'} sx={{ color: 'rgba(0, 0, 0, .5)', marginBottom: '5px', fontWeight: 100 }}>
+              <Typography
+                variant={'body1'}
+                sx={{
+                  color: 'rgba(0, 0, 0, .5)',
+                  marginBottom: '5px',
+                  fontWeight: 100,
+                }}
+              >
                 Shipping
               </Typography>
-              <Typography variant={'body1'} sx={{ color: 'rgba(0, 0, 0, .5)', marginBottom: '5px', fontWeight: 100 }}>
+              <Typography
+                variant={'body1'}
+                sx={{
+                  color: 'rgba(0, 0, 0, .5)',
+                  marginBottom: '5px',
+                  fontWeight: 100,
+                }}
+              >
                 Cancellation & Returns
               </Typography>
             </Stack>
             <Stack direction="column" spacing={2}>
-              <Typography variant={'h6'} sx={{ color: 'rgba(0, 0, 0, .5)', marginBottom: '5px', fontWeight: 100 }}>
+              <Typography
+                variant={'h6'}
+                sx={{
+                  color: 'rgba(0, 0, 0, .5)',
+                  marginBottom: '5px',
+                  fontWeight: 100,
+                }}
+              >
                 POLICY
               </Typography>
-              <Typography variant={'body1'} sx={{ color: 'rgba(0, 0, 0, .5)', marginBottom: '5px', fontWeight: 100 }}>
+              <Typography
+                variant={'body1'}
+                sx={{
+                  color: 'rgba(0, 0, 0, .5)',
+                  marginBottom: '5px',
+                  fontWeight: 100,
+                }}
+              >
                 Return Policy
               </Typography>
-              <Typography variant={'body1'} sx={{ color: 'rgba(0, 0, 0, .5)', marginBottom: '5px', fontWeight: 100 }}>
+              <Typography
+                variant={'body1'}
+                sx={{
+                  color: 'rgba(0, 0, 0, .5)',
+                  marginBottom: '5px',
+                  fontWeight: 100,
+                }}
+              >
                 Terms Of Use
               </Typography>
-              <Typography variant={'body1'} sx={{ color: 'rgba(0, 0, 0, .5)', marginBottom: '5px', fontWeight: 100 }}>
+              <Typography
+                variant={'body1'}
+                sx={{
+                  color: 'rgba(0, 0, 0, .5)',
+                  marginBottom: '5px',
+                  fontWeight: 100,
+                }}
+              >
                 Security
               </Typography>
             </Stack>
@@ -131,34 +256,71 @@ export const Footer = () => {
         </Grid>
         <Grid item xs={6} md={12}>
           <Divider />
-          <Stack direction="row" spacing={2} justifyContent="space-between" alignItems="center" sx={{ paddingY: '60px' }}>
-            <Typography variant={'h6'} sx={{ color: 'rgba(0, 0, 0, .5)', marginBottom: '5px', fontWeight: 100 }}>
+          <Stack
+            direction="row"
+            spacing={2}
+            justifyContent="space-between"
+            alignItems="center"
+            sx={{ paddingY: '60px' }}
+          >
+            <Typography
+              variant={'h6'}
+              sx={{
+                color: 'rgba(0, 0, 0, .5)',
+                marginBottom: '5px',
+                fontWeight: 100,
+              }}
+            >
               &copy; 2024 Location-info
             </Typography>
+            <Button onClick={toggleTheme}>
+              {isDark ? <LightModeIcon /> : <DarkModeIcon />}
+            </Button>
             <Stack direction="row" spacing={2}>
-              <Link to='https://github.com/Naumetsdmytro/location-info/tree/main'>
+              <Link to="https://github.com/Naumetsdmytro/location-info/tree/main">
                 <Button
                   variant="contained"
-                  style={{ backgroundColor: '#3b5998', color: 'white', height: '55px', width: '55px' }}
-                  onClick={() => {console.log('facebook')}}
+                  style={{
+                    backgroundColor: '#3b5998',
+                    color: 'white',
+                    height: '55px',
+                    width: '55px',
+                  }}
+                  onClick={() => {
+                    console.log('facebook')
+                  }}
                 >
                   <GitHubIcon />
                 </Button>
               </Link>
-              <Link to='https://twitter.com/AndrijCikulaj'>
+              <Link to="https://twitter.com/AndrijCikulaj">
                 <Button
                   variant="contained"
-                  style={{ backgroundColor: '#00acee', color: 'white', height: '55px', width: '55px' }}
-                  onClick={() => {console.log('twitter')}}
+                  style={{
+                    backgroundColor: '#00acee',
+                    color: 'white',
+                    height: '55px',
+                    width: '55px',
+                  }}
+                  onClick={() => {
+                    console.log('twitter')
+                  }}
                 >
                   <TwitterIcon />
                 </Button>
               </Link>
-              <Link to='https://www.linkedin.com/in/andrii-chykulai'>
+              <Link to="https://www.linkedin.com/in/andrii-chykulai">
                 <Button
                   variant="contained"
-                  style={{ backgroundColor: '#0e76a8', color: 'white', height: '55px', width: '55px' }}
-                  onClick={() => {console.log('linkedin')}}
+                  style={{
+                    backgroundColor: '#0e76a8',
+                    color: 'white',
+                    height: '55px',
+                    width: '55px',
+                  }}
+                  onClick={() => {
+                    console.log('linkedin')
+                  }}
                 >
                   <LinkedInIcon />
                 </Button>
