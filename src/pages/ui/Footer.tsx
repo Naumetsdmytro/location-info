@@ -18,7 +18,7 @@ import TwitterIcon from '@mui/icons-material/Twitter'
 import { Link } from 'react-router-dom'
 import DarkModeIcon from '@mui/icons-material/DarkMode'
 import LightModeIcon from '@mui/icons-material/LightMode'
-import { useTheme } from './hooks/useTheme'
+import { useTheme } from '../../shared/hooks/useTheme'
 
 export const Footer = () => {
   const [email, setEmail] = useState('')
