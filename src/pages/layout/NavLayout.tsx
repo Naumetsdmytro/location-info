@@ -3,6 +3,7 @@ import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { useAuthContext } from '../../features/auth'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { getItemFromStorage } from '../../shared'
+import logo from '../assets/location-info-logo.png'
 
 interface Props {
 	children: React.ReactNode
@@ -36,15 +37,13 @@ export const NavLayout = ({ children }: Props) => {
 
 	return (
 		<>
-			<Disclosure as="nav" className="bg-transparent absolute w-full">
+			<Disclosure as="nav" className="bg-transparent w-full">
 				<>
 					<div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
 						<div className="relative flex h-16 items-center justify-between">
 							<div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
 								<div className="flex flex-shrink-0 items-center">
-									<span className="text-black font-bold text-xl">
-										Location-info
-									</span>
+									<img style={{width: '140px', height: "80px"}} src={logo} alt="logo" />
 								</div>
 								{isAuthenticated && (
 									<div className="hidden sm:ml-6 sm:block">
