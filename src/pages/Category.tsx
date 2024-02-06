@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import { PlaceData } from './model/models';
-import { Box, Paper, Typography } from '@mui/material';
+import { Box, Paper, Typography, List, ListItem, ListItemText, Divider } from '@mui/material';
 import ReactDOMServer from 'react-dom/server';
 
 const api = 'l3X3aMFHj6CBqM97uul8SNcYiwOhwBqmgWJUIsTmAVI';
@@ -25,7 +25,7 @@ export const Category = () => {
   useEffect(() => {
     const map = L.map(mapRef.current, {
       center: [49.0119, 24.3731],
-      zoom: 12,
+      zoom: 12.5,
     });
 
     const hereTileUrl = `https://{s}.base.maps.ls.hereapi.com/maptile/2.1/maptile/newest/normal.day/{z}/{x}/{y}/256/png8?apiKey=${api}&ppi=320`;
@@ -89,5 +89,53 @@ export const Category = () => {
     };
   }, []);
 
-  return <Box ref={mapRef} sx={{ height: 500, width: '80%', margin: '0 auto' }} />;
+  return (
+    <Box sx={{ display: 'flex', borderRadius: '10px', margin: '0 auto', padding: "15px", backgroundColor: "#f0f0f0", height: '500px', width: "70%" }}> 
+      <Box
+        sx={{
+          width: 300,
+          overflowY: 'auto', 
+          borderColor: 'divider'
+        }}
+      >
+        <Typography
+          variant="h6"
+          component="div"
+          sx={{
+            position: 'sticky',
+            top: 0, 
+            zIndex: 1100,
+            fontWeight: 'bold',
+            p: 2,
+            backgroundColor: 'primary.main', 
+            color: 'primary.contrastText',
+            borderRadius: '10px 10px 0 0'
+          }}
+        >
+          {categoryName?.toUpperCase() + ' Near You'}
+        </Typography>
+        <List sx={{ backgroundColor: "#fff", borderRadius: '0 0 10px 10px'}} component="nav" aria-label="mailbox folders">
+          {places.map((place, index) => (
+            <> 
+              <ListItem key={place.id}>
+                <ListItemText primary={place.title} secondary={place.distance + "m" + " " + "away"} />
+              </ListItem>
+              {index < places.length - 1 && <Divider />}
+            </>
+          ))}
+        </List>
+      </Box>
+      <Box
+        ref={mapRef}
+        sx={{
+          flexGrow: 1,
+          height: '100%',
+          width: "70%",
+          marginLeft: "10px",
+          borderRadius: '10px'
+        }}
+      >
+      </Box>
+    </Box>
+  );
 };
