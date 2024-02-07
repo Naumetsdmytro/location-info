@@ -1,22 +1,24 @@
-import { useRoutes } from './proccess/routes'
+import React from 'react'
+
 import { AuthContext } from './features/auth/context/AuthContext'
 import { useAuth } from './features/auth/hooks/useAuth'
+import { useRoutes } from './proccess/routes'
 import { ThemeState } from './shared/hooks/useTheme'
 
 const App = () => {
-  const { token, user, logout, login } = useAuth()
-  const isAuthenticated = !!token
-  const routes = useRoutes(isAuthenticated)
+	const { login, logout, token, user } = useAuth()
+	const isAuthenticated = !!token
+	const routes = useRoutes(isAuthenticated)
 
-  return (
-    <>
-    <AuthContext.Provider value={{ token, user: { email: '', fullName: '' }, logout, login, isAuthenticated }}>
-    <ThemeState>
-      {routes}
-    </ThemeState>
-    </AuthContext.Provider>
-    </>
-  )
+	return (
+		<>
+			<AuthContext.Provider
+				value={{ isAuthenticated, login, logout, token, user: { email: '', fullName: '' } }}
+			>
+				<ThemeState>{routes}</ThemeState>
+			</AuthContext.Provider>
+		</>
+	)
 }
 
-export default App;
+export default App

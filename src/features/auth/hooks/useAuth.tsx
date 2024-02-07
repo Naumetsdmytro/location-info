@@ -1,48 +1,50 @@
 import { useCallback, useEffect, useState } from 'react'
-import {
-  getItemFromStorage,
-  removeItemFromStorage,
-  setItemToStorage,
-} from '../../../shared'
+
+import { getItemFromStorage, removeItemFromStorage, setItemToStorage } from '../../../shared'
 
 interface IUser {
-  email: string
-  fullName: string
+	email: string
+	fullName: string
+}
+
+interface IUserData {
+	token: string
+	user: IUser
 }
 
 export const useAuth = () => {
-  const [token, setToken] = useState<string | null>(null)
-  const [user, setUser] = useState({})
+	const [token, setToken] = useState<null | string>(null)
+	const [user, setUser] = useState<IUser>({ email: '', fullName: '' })
 
-  const login = useCallback((jwtToken: string, user: IUser) => {
-    setToken(jwtToken)
-    setUser(user)
+	const login = useCallback((jwtToken: string, userData: IUser) => {
+		setToken(jwtToken)
+		setUser(userData)
 
-    setItemToStorage('userData', { token: jwtToken, user: user })
-  }, [])
+		setItemToStorage('userData', { token: jwtToken, user: userData })
+	}, [])
 
-  const logout = () => {
-    setToken(null)
-    setUser({})
+	const logout = () => {
+		setToken(null)
+		setUser({ email: '', fullName: '' })
 
-    removeItemFromStorage('userData')
-  }
+		removeItemFromStorage('userData')
+	}
 
-  useEffect(() => {
-    const userData = getItemFromStorage('userData')
+	useEffect(() => {
+		const userData = getItemFromStorage('userData') as IUserData | null
 
-    if (userData) {
-      const { token, user } = userData
+		if (userData) {
+			const { token: storedToken, user: storedUser } = userData
 
-      if (token && user) {
-        try {
-          login(token, user)
-        } catch (error) {
-          console.error('Error parsing user data', error)
-        }
-      }
-    }
-  }, [login])
+			if (storedToken && storedUser) {
+				try {
+					login(storedToken, storedUser)
+				} catch (error) {
+					console.error('Error parsing user data', error)
+				}
+			}
+		}
+	}, [login])
 
-  return { login, logout, token, user }
+	return { login, logout, token, user }
 }

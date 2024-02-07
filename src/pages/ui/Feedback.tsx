@@ -1,18 +1,21 @@
+import React from 'react'
+
+import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline'
+import MailOutlineIcon from '@mui/icons-material/MailOutline'
 import {
 	Box,
 	Button,
-	Stack,
-	Typography,
-	TextField,
-	InputAdornment,
 	IconButton,
+	InputAdornment,
+	Stack,
+	TextField,
+	Typography,
 } from '@mui/material'
 import { useState } from 'react'
-import MailOutlineIcon from '@mui/icons-material/MailOutline'
-import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline'
-import { useSpring, animated } from 'react-spring'
-import { notifySuccess } from '../../shared/notifySuccess'
+import { animated, useSpring } from 'react-spring'
 import { ToastContainer } from 'react-toastify'
+
+import { notifySuccess } from '../../shared/notifySuccess'
 
 export const Feedback = () => {
 	const [clicked, setClicked] = useState(false)
@@ -32,11 +35,11 @@ export const Feedback = () => {
 	}
 
 	const fadeProps = useSpring({
-		opacity: clicked ? 1 : 0,
-		transform: clicked ? 'translateY(0)' : 'translateY(30px)',
 		config: {
 			duration: 1000,
 		},
+		opacity: clicked ? 1 : 0,
+		transform: clicked ? 'translateY(0)' : 'translateY(30px)',
 	})
 
 	const onSubmit = () => {
@@ -44,37 +47,31 @@ export const Feedback = () => {
 	}
 
 	return (
-		<Box
-			component="div"
-			sx={{ paddingX: '100px', paddingTop: '100px', paddingBottom: '30px' }}
-		>
+		<Box component="div" sx={{ paddingBottom: '30px', paddingTop: '100px', paddingX: '100px' }}>
 			<Stack
-				direction="column"
-				spacing={2}
-				justifyContent="space-between"
 				alignItems="center"
+				direction="column"
+				justifyContent="space-between"
+				spacing={2}
 				sx={{ paddingY: '60px' }}
 			>
 				<Typography
-					variant={'h4'}
 					sx={{
 						color: 'rgba(0, 0, 0, .5)',
-						marginBottom: '5px',
 						fontWeight: 100,
+						marginBottom: '5px',
 					}}
+					variant={'h4'}
 				>
 					IF YOU HAVE ANY FEEDBACK ABOUT OUR SERVICE, PLEASE LET US KNOW
 				</Typography>
-				<Typography
-					variant={'h6'}
-					sx={{ color: 'rgba(0, 0, 0, .7)', fontWeight: 100 }}
-				>
+				<Typography sx={{ color: 'rgba(0, 0, 0, .7)', fontWeight: 100 }} variant={'h6'}>
 					WE WOULD ❤️ LOVE TO HEAR FROM 🫵
 				</Typography>
 				<Button
-					variant="contained"
-					sx={{ backgroundColor: '#5a67d8', color: 'white' }}
 					onClick={handleClick}
+					sx={{ backgroundColor: '#5a67d8', color: 'white' }}
+					variant="contained"
 				>
 					CONTACT US
 				</Button>
@@ -82,23 +79,13 @@ export const Feedback = () => {
 			{clicked && (
 				<animated.div style={{ ...fadeProps, transformOrigin: 'center' }}>
 					<Stack
-						direction="column"
-						spacing={2}
-						justifyContent="center"
 						alignItems="center"
+						direction="column"
+						justifyContent="center"
+						spacing={2}
 						sx={{ paddingX: '300px' }}
 					>
 						<TextField
-							fullWidth
-							value={email}
-							onChange={handleEmailChange}
-							placeholder="Your Email"
-							variant="outlined"
-							sx={{
-								backgroundColor: 'rgba(255, 255, 255, 1)',
-								borderRadius: '10px',
-								marginRight: '70px',
-							}}
 							InputProps={{
 								startAdornment: (
 									<InputAdornment position="start">
@@ -108,19 +95,18 @@ export const Feedback = () => {
 									</InputAdornment>
 								),
 							}}
-						/>
-						<TextField
 							fullWidth
-							value={msg}
-							onChange={handleMsgChange}
-							placeholder="Your Message"
-							variant="outlined"
-							multiline
+							onChange={handleEmailChange}
+							placeholder="Your Email"
 							sx={{
 								backgroundColor: 'rgba(255, 255, 255, 1)',
 								borderRadius: '10px',
 								marginRight: '70px',
 							}}
+							value={email}
+							variant="outlined"
+						/>
+						<TextField
 							InputProps={{
 								startAdornment: (
 									<InputAdornment position="start">
@@ -130,16 +116,27 @@ export const Feedback = () => {
 									</InputAdornment>
 								),
 							}}
+							fullWidth
+							multiline
+							onChange={handleMsgChange}
+							placeholder="Your Message"
+							sx={{
+								backgroundColor: 'rgba(255, 255, 255, 1)',
+								borderRadius: '10px',
+								marginRight: '70px',
+							}}
+							value={msg}
+							variant="outlined"
 						/>
 						<Button
-							variant="contained"
+							onClick={onSubmit}
 							style={{
 								backgroundColor: '#0e76a8',
 								color: 'white',
 								height: '55px',
 								width: '200px',
 							}}
-							onClick={onSubmit}
+							variant="contained"
 						>
 							Send
 						</Button>
