@@ -43,7 +43,18 @@ export const NavLayout = ({ children }: Props) => {
 						<div className="relative flex h-16 items-center justify-between">
 							<div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
 								<div className="flex flex-shrink-0 items-center">
-									<img style={{width: '140px', height: "80px"}} src={logo} alt="logo" />
+									<Link to="/main">
+										<img
+											className="block lg:hidden h-10 w-auto"
+											src={logo}
+											alt="Location Info"
+										/>
+										<img
+											className="hidden lg:block h-10 w-auto"
+											src={logo}
+											alt="Location Info"
+										/>
+									</Link>
 								</div>
 								{isAuthenticated && (
 									<div className="hidden sm:ml-6 sm:block">
