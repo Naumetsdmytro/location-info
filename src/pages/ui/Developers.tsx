@@ -1,20 +1,23 @@
-import { Box, Stack, Typography, Avatar } from '@mui/material'
-import AndriiPhoto from '../assets/Andrii.jpg'
+import React from 'react'
+
+import { Avatar, Box, Stack, Typography } from '@mui/material'
 import { LazyMotion, domAnimation, motion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
 
+import AndriiPhoto from '../assets/Andrii.jpg'
+
 const developers = [
 	{
+		github: 'https://github.com/Andriy15',
+		image: AndriiPhoto,
 		name: 'Andrii Chykulai',
 		role: 'Frontend Developer',
-		image: AndriiPhoto,
-		github: 'https://github.com/Andriy15',
 	},
 	{
+		github: 'https://github.com/Naumetsdmytro',
+		image: 'https://avatars.githubusercontent.com/u/60961857?v=4',
 		name: 'Dmytro Naumets',
 		role: 'Fullstack Developer',
-		image: 'https://avatars.githubusercontent.com/u/60961857?v=4',
-		github: 'https://github.com/Naumetsdmytro',
 	},
 ]
 
@@ -25,90 +28,88 @@ export const Developers = () => {
 
 	return (
 		<Box
-			component={motion.div}
-			initial={{ opacity: 0 }}
 			animate={{ opacity: 1 }}
+			component={motion.div}
 			exit={{ opacity: 0 }}
+			initial={{ opacity: 0 }}
 			sx={{
-				marginX: '150px',
-				paddingY: '100px',
 				backgroundColor: '#f0f0f0',
 				borderRadius: '20px',
+				marginX: '150px',
+				paddingY: '100px',
 			}}
 		>
 			<Typography
-				variant={'h3'}
 				sx={{
-					fontWeight: 'bold',
 					color: 'text.primary',
-					textAlign: 'center',
+					fontWeight: 'bold',
 					marginTop: '40px',
+					textAlign: 'center',
 				}}
+				variant={'h3'}
 			>
-				<span
-					style={{ borderBottom: '4px solid #61dafb', paddingBottom: '10px' }}
-				>
+				<span style={{ borderBottom: '4px solid #61dafb', paddingBottom: '10px' }}>
 					This project was created by
 				</span>
 			</Typography>
 			<Stack
-				direction="row"
-				spacing={4}
-				justifyContent="center"
 				alignItems="center"
+				direction="row"
+				justifyContent="center"
+				spacing={4}
 				sx={{ paddingY: '60px' }}
 			>
 				{developers.map((developer, index) => (
 					<Stack
-						key={index}
-						direction="column"
-						spacing={2}
-						justifyContent="space-between"
 						alignItems="center"
+						direction="column"
+						justifyContent="space-between"
+						key={index}
+						spacing={2}
 						sx={{ paddingY: '60px' }}
 					>
 						<LazyMotion features={domAnimation}>
 							<motion.div
-								ref={ref}
+								animate={{ scale: inView ? 1 : 0 }}
 								initial={{ scale: 0 }}
-								animate={{ scale: inView ? 1 : 0 }} 
-								transition={{ duration: 0.5, delay: index * 0.2 }}
+								ref={ref}
+								transition={{ delay: index * 0.2, duration: 0.5 }}
 							>
 								<Avatar
-									src={developer.image}
 									alt={developer.name}
-									sx={{ width: 200, height: 200, borderRadius: '50%' }}
+									src={developer.image}
+									sx={{ borderRadius: '50%', height: 200, width: 200 }}
 								/>
 							</motion.div>
 						</LazyMotion>
 						<Typography
-							variant={'h5'}
 							sx={{
-								fontWeight: 'bold',
 								color: 'text.primary',
+								fontWeight: 'bold',
 								textAlign: 'center',
 							}}
+							variant={'h5'}
 						>
 							{developer.name}
 						</Typography>
 						<Typography
-							variant={'h6'}
 							sx={{
-								fontWeight: 'bold',
 								color: 'text.primary',
+								fontWeight: 'bold',
 								textAlign: 'center',
 							}}
+							variant={'h6'}
 						>
 							{developer.role}
 						</Typography>
-						<a href={developer.github} target="_blank" rel="noreferrer">
+						<a href={developer.github} rel="noreferrer" target="_blank">
 							<Typography
-								variant={'h6'}
 								sx={{
-									fontWeight: 'bold',
 									color: 'text.primary',
+									fontWeight: 'bold',
 									textAlign: 'center',
 								}}
+								variant={'h6'}
 							>
 								Github
 							</Typography>

@@ -1,34 +1,33 @@
-import { Grid, Paper, Typography, Box } from '@mui/material';
-import { Link } from "react-router-dom";
-import React from 'react';
+import { Box, Grid, Paper, Typography } from '@mui/material'
+import React from 'react'
+import { Link } from 'react-router-dom'
 
 interface Props {
-  text: string
-  icon: React.ReactNode
+	icon: React.ReactNode
+	text: string
 }
 
-
-export const SectionItem = ({text, icon}: Props) => {
-  return (
-    <Grid item xs={12} sm={6} md={4} lg={3}>
-      <Link to={text.toLowerCase()}>
-        <Paper
-          elevation={3}
-          sx={{
-            padding: 2,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            justifyContent: 'center',
-            height: 150,
-            backgroundColor: '#9c27b0',
-            color: '#fff',
-          }}
-        >
-          {icon}
-          <Typography variant="subtitle1">{text}</Typography>
-        </Paper>
-      </Link>
-    </Grid>
-  )
+export const SectionItem = ({ icon, text }: Props) => {
+	return (
+		<Grid item lg={3} md={4} sm={6} xs={12}>
+			<Link to={text.toLowerCase()}>
+				<Paper
+					elevation={3}
+					sx={{
+						alignItems: 'center',
+						backgroundColor: '#9c27b0',
+						color: '#fff',
+						display: 'flex',
+						flexDirection: 'column',
+						height: 150,
+						justifyContent: 'center',
+						padding: 2,
+					}}
+				>
+					{icon}
+					<Typography variant="subtitle1">{text}</Typography>
+				</Paper>
+			</Link>
+		</Grid>
+	)
 }

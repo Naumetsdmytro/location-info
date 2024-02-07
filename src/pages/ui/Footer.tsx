@@ -1,334 +1,327 @@
-import {
-  Box,
-  Grid,
-  Stack,
-  Typography,
-  Button,
-  Divider,
-  TextField,
-  InputAdornment,
-  IconButton,
-} from '@mui/material'
-import { useState } from 'react'
+import React from 'react'
+
+import DarkModeIcon from '@mui/icons-material/DarkMode'
+import GitHubIcon from '@mui/icons-material/GitHub'
+import LightModeIcon from '@mui/icons-material/LightMode'
+import LinkedInIcon from '@mui/icons-material/LinkedIn'
 import MailOutlineIcon from '@mui/icons-material/MailOutline'
 import PersonIcon from '@mui/icons-material/Person'
-import GitHubIcon from '@mui/icons-material/GitHub'
-import LinkedInIcon from '@mui/icons-material/LinkedIn'
 import TwitterIcon from '@mui/icons-material/Twitter'
+import {
+	Box,
+	Button,
+	Divider,
+	Grid,
+	IconButton,
+	InputAdornment,
+	Stack,
+	TextField,
+	Typography,
+} from '@mui/material'
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import DarkModeIcon from '@mui/icons-material/DarkMode'
-import LightModeIcon from '@mui/icons-material/LightMode'
+
 import { useTheme } from '../../shared/hooks/useTheme'
 
 export const Footer = () => {
-  const [email, setEmail] = useState('')
-  const [name, setName] = useState('')
-  const { isDark, toggleTheme } = useTheme()
+	const [email, setEmail] = useState('')
+	const [name, setName] = useState('')
+	const { isDark, toggleTheme } = useTheme()
 
-  const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setName(event.target.value)
-  }
+	const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+		setName(event.target.value)
+	}
 
-  const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setEmail(event.target.value)
-  }
+	const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+		setEmail(event.target.value)
+	}
 
-  return (
-    <Box
-      component="div"
-      sx={{ paddingX: '100px', paddingTop: '100px', paddingBottom: '30px' }}
-    >
-      <Grid container spacing={8}>
-        <Grid item xs={6} md={12}>
-          <Divider />
-          <Stack
-            direction="row"
-            spacing={2}
-            justifyContent="space-between"
-            alignItems="center"
-            sx={{ paddingY: '60px' }}
-          >
-            <Typography
-              variant={'h6'}
-              sx={{
-                color: 'rgba(0, 0, 0, .5)',
-                marginBottom: '5px',
-                fontWeight: 100,
-              }}
-            >
-              NEWSLETTER
-            </Typography>
-            <Stack direction="row" alignItems="center">
-              <TextField
-                value={name}
-                onChange={handleNameChange}
-                placeholder="Name"
-                variant="outlined"
-                sx={{
-                  width: '300px',
-                  backgroundColor: 'rgba(255, 255, 255, 1)',
-                  borderRadius: '10px',
-                  marginRight: '70px',
-                }}
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position="start">
-                      <IconButton>
-                        <PersonIcon />
-                      </IconButton>
-                    </InputAdornment>
-                  ),
-                }}
-              />
-              <TextField
-                value={email}
-                onChange={handleEmailChange}
-                placeholder="Your Email"
-                variant="outlined"
-                sx={{
-                  width: '300px',
-                  backgroundColor: 'rgba(255, 255, 255, 1)',
-                  borderRadius: '10px',
-                  marginRight: '70px',
-                }}
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position="start">
-                      <IconButton>
-                        <MailOutlineIcon />
-                      </IconButton>
-                    </InputAdornment>
-                  ),
-                }}
-              />
-              <Button
-                variant="contained"
-                style={{
-                  backgroundColor: '#5a67d8',
-                  color: 'white',
-                  height: '55px',
-                  width: '200px',
-                }}
-                onClick={() => {
-                  console.log('subscribe')
-                }}
-              >
-                Subscribe
-              </Button>
-            </Stack>
-          </Stack>
-          <Divider />
-        </Grid>
-        <Grid item xs={6} md={12}>
-          <Stack
-            direction="row"
-            spacing={2}
-            justifyContent="space-between"
-            alignItems="center"
-          >
-            <Stack direction="column" spacing={2}>
-              <Typography
-                variant={'h6'}
-                sx={{
-                  color: 'rgba(0, 0, 0, .5)',
-                  marginBottom: '5px',
-                  fontWeight: 100,
-                }}
-              >
-                ABOUT
-              </Typography>
-              <Typography
-                variant={'body1'}
-                sx={{
-                  color: 'rgba(0, 0, 0, .5)',
-                  marginBottom: '5px',
-                  fontWeight: 100,
-                }}
-              >
-                About Us
-              </Typography>
-              <Typography
-                variant={'body1'}
-                sx={{
-                  color: 'rgba(0, 0, 0, .5)',
-                  marginBottom: '5px',
-                  fontWeight: 100,
-                }}
-              >
-                Contact Us
-              </Typography>
-              <Typography
-                variant={'body1'}
-                sx={{
-                  color: 'rgba(0, 0, 0, .5)',
-                  marginBottom: '5px',
-                  fontWeight: 100,
-                }}
-              >
-                Careers
-              </Typography>
-            </Stack>
-            <Stack direction="column" spacing={2}>
-              <Typography
-                variant={'h6'}
-                sx={{
-                  color: 'rgba(0, 0, 0, .5)',
-                  marginBottom: '5px',
-                  fontWeight: 100,
-                }}
-              >
-                HELP
-              </Typography>
-              <Typography
-                variant={'body1'}
-                sx={{
-                  color: 'rgba(0, 0, 0, .5)',
-                  marginBottom: '5px',
-                  fontWeight: 100,
-                }}
-              >
-                Payments
-              </Typography>
-              <Typography
-                variant={'body1'}
-                sx={{
-                  color: 'rgba(0, 0, 0, .5)',
-                  marginBottom: '5px',
-                  fontWeight: 100,
-                }}
-              >
-                Shipping
-              </Typography>
-              <Typography
-                variant={'body1'}
-                sx={{
-                  color: 'rgba(0, 0, 0, .5)',
-                  marginBottom: '5px',
-                  fontWeight: 100,
-                }}
-              >
-                Cancellation & Returns
-              </Typography>
-            </Stack>
-            <Stack direction="column" spacing={2}>
-              <Typography
-                variant={'h6'}
-                sx={{
-                  color: 'rgba(0, 0, 0, .5)',
-                  marginBottom: '5px',
-                  fontWeight: 100,
-                }}
-              >
-                POLICY
-              </Typography>
-              <Typography
-                variant={'body1'}
-                sx={{
-                  color: 'rgba(0, 0, 0, .5)',
-                  marginBottom: '5px',
-                  fontWeight: 100,
-                }}
-              >
-                Return Policy
-              </Typography>
-              <Typography
-                variant={'body1'}
-                sx={{
-                  color: 'rgba(0, 0, 0, .5)',
-                  marginBottom: '5px',
-                  fontWeight: 100,
-                }}
-              >
-                Terms Of Use
-              </Typography>
-              <Typography
-                variant={'body1'}
-                sx={{
-                  color: 'rgba(0, 0, 0, .5)',
-                  marginBottom: '5px',
-                  fontWeight: 100,
-                }}
-              >
-                Security
-              </Typography>
-            </Stack>
-          </Stack>
-        </Grid>
-        <Grid item xs={6} md={12}>
-          <Divider />
-          <Stack
-            direction="row"
-            spacing={2}
-            justifyContent="space-between"
-            alignItems="center"
-            sx={{ paddingY: '60px' }}
-          >
-            <Typography
-              variant={'h6'}
-              sx={{
-                color: 'rgba(0, 0, 0, .5)',
-                marginBottom: '5px',
-                fontWeight: 100,
-              }}
-            >
-              &copy; 2024 Location-info
-            </Typography>
-            <Button onClick={toggleTheme}>
-              {isDark ? <LightModeIcon /> : <DarkModeIcon />}
-            </Button>
-            <Stack direction="row" spacing={2}>
-              <Link to="https://github.com/Naumetsdmytro/location-info/tree/main">
-                <Button
-                  variant="contained"
-                  style={{
-                    backgroundColor: '#3b5998',
-                    color: 'white',
-                    height: '55px',
-                    width: '55px',
-                  }}
-                  onClick={() => {
-                    console.log('facebook')
-                  }}
-                >
-                  <GitHubIcon />
-                </Button>
-              </Link>
-              <Link to="https://twitter.com/AndrijCikulaj">
-                <Button
-                  variant="contained"
-                  style={{
-                    backgroundColor: '#00acee',
-                    color: 'white',
-                    height: '55px',
-                    width: '55px',
-                  }}
-                  onClick={() => {
-                    console.log('twitter')
-                  }}
-                >
-                  <TwitterIcon />
-                </Button>
-              </Link>
-              <Link to="https://www.linkedin.com/in/andrii-chykulai">
-                <Button
-                  variant="contained"
-                  style={{
-                    backgroundColor: '#0e76a8',
-                    color: 'white',
-                    height: '55px',
-                    width: '55px',
-                  }}
-                  onClick={() => {
-                    console.log('linkedin')
-                  }}
-                >
-                  <LinkedInIcon />
-                </Button>
-              </Link>
-            </Stack>
-          </Stack>
-        </Grid>
-      </Grid>
-    </Box>
-  )
+	return (
+		<Box component="div" sx={{ paddingBottom: '30px', paddingTop: '100px', paddingX: '100px' }}>
+			<Grid container spacing={8}>
+				<Grid item md={12} xs={6}>
+					<Divider />
+					<Stack
+						alignItems="center"
+						direction="row"
+						justifyContent="space-between"
+						spacing={2}
+						sx={{ paddingY: '60px' }}
+					>
+						<Typography
+							sx={{
+								color: 'rgba(0, 0, 0, .5)',
+								fontWeight: 100,
+								marginBottom: '5px',
+							}}
+							variant={'h6'}
+						>
+							NEWSLETTER
+						</Typography>
+						<Stack alignItems="center" direction="row">
+							<TextField
+								InputProps={{
+									startAdornment: (
+										<InputAdornment position="start">
+											<IconButton>
+												<PersonIcon />
+											</IconButton>
+										</InputAdornment>
+									),
+								}}
+								onChange={handleNameChange}
+								placeholder="Name"
+								sx={{
+									backgroundColor: 'rgba(255, 255, 255, 1)',
+									borderRadius: '10px',
+									marginRight: '70px',
+									width: '300px',
+								}}
+								value={name}
+								variant="outlined"
+							/>
+							<TextField
+								InputProps={{
+									startAdornment: (
+										<InputAdornment position="start">
+											<IconButton>
+												<MailOutlineIcon />
+											</IconButton>
+										</InputAdornment>
+									),
+								}}
+								onChange={handleEmailChange}
+								placeholder="Your Email"
+								sx={{
+									backgroundColor: 'rgba(255, 255, 255, 1)',
+									borderRadius: '10px',
+									marginRight: '70px',
+									width: '300px',
+								}}
+								value={email}
+								variant="outlined"
+							/>
+							<Button
+								onClick={() => {
+									console.log('subscribe')
+								}}
+								style={{
+									backgroundColor: '#5a67d8',
+									color: 'white',
+									height: '55px',
+									width: '200px',
+								}}
+								variant="contained"
+							>
+								Subscribe
+							</Button>
+						</Stack>
+					</Stack>
+					<Divider />
+				</Grid>
+				<Grid item md={12} xs={6}>
+					<Stack alignItems="center" direction="row" justifyContent="space-between" spacing={2}>
+						<Stack direction="column" spacing={2}>
+							<Typography
+								sx={{
+									color: 'rgba(0, 0, 0, .5)',
+									fontWeight: 100,
+									marginBottom: '5px',
+								}}
+								variant={'h6'}
+							>
+								ABOUT
+							</Typography>
+							<Typography
+								sx={{
+									color: 'rgba(0, 0, 0, .5)',
+									fontWeight: 100,
+									marginBottom: '5px',
+								}}
+								variant={'body1'}
+							>
+								About Us
+							</Typography>
+							<Typography
+								sx={{
+									color: 'rgba(0, 0, 0, .5)',
+									fontWeight: 100,
+									marginBottom: '5px',
+								}}
+								variant={'body1'}
+							>
+								Contact Us
+							</Typography>
+							<Typography
+								sx={{
+									color: 'rgba(0, 0, 0, .5)',
+									fontWeight: 100,
+									marginBottom: '5px',
+								}}
+								variant={'body1'}
+							>
+								Careers
+							</Typography>
+						</Stack>
+						<Stack direction="column" spacing={2}>
+							<Typography
+								sx={{
+									color: 'rgba(0, 0, 0, .5)',
+									fontWeight: 100,
+									marginBottom: '5px',
+								}}
+								variant={'h6'}
+							>
+								HELP
+							</Typography>
+							<Typography
+								sx={{
+									color: 'rgba(0, 0, 0, .5)',
+									fontWeight: 100,
+									marginBottom: '5px',
+								}}
+								variant={'body1'}
+							>
+								Payments
+							</Typography>
+							<Typography
+								sx={{
+									color: 'rgba(0, 0, 0, .5)',
+									fontWeight: 100,
+									marginBottom: '5px',
+								}}
+								variant={'body1'}
+							>
+								Shipping
+							</Typography>
+							<Typography
+								sx={{
+									color: 'rgba(0, 0, 0, .5)',
+									fontWeight: 100,
+									marginBottom: '5px',
+								}}
+								variant={'body1'}
+							>
+								Cancellation & Returns
+							</Typography>
+						</Stack>
+						<Stack direction="column" spacing={2}>
+							<Typography
+								sx={{
+									color: 'rgba(0, 0, 0, .5)',
+									fontWeight: 100,
+									marginBottom: '5px',
+								}}
+								variant={'h6'}
+							>
+								POLICY
+							</Typography>
+							<Typography
+								sx={{
+									color: 'rgba(0, 0, 0, .5)',
+									fontWeight: 100,
+									marginBottom: '5px',
+								}}
+								variant={'body1'}
+							>
+								Return Policy
+							</Typography>
+							<Typography
+								sx={{
+									color: 'rgba(0, 0, 0, .5)',
+									fontWeight: 100,
+									marginBottom: '5px',
+								}}
+								variant={'body1'}
+							>
+								Terms Of Use
+							</Typography>
+							<Typography
+								sx={{
+									color: 'rgba(0, 0, 0, .5)',
+									fontWeight: 100,
+									marginBottom: '5px',
+								}}
+								variant={'body1'}
+							>
+								Security
+							</Typography>
+						</Stack>
+					</Stack>
+				</Grid>
+				<Grid item md={12} xs={6}>
+					<Divider />
+					<Stack
+						alignItems="center"
+						direction="row"
+						justifyContent="space-between"
+						spacing={2}
+						sx={{ paddingY: '60px' }}
+					>
+						<Typography
+							sx={{
+								color: 'rgba(0, 0, 0, .5)',
+								fontWeight: 100,
+								marginBottom: '5px',
+							}}
+							variant={'h6'}
+						>
+							&copy; 2024 Location-info
+						</Typography>
+						<Button onClick={toggleTheme}>{isDark ? <LightModeIcon /> : <DarkModeIcon />}</Button>
+						<Stack direction="row" spacing={2}>
+							<Link to="https://github.com/Naumetsdmytro/location-info/tree/main">
+								<Button
+									onClick={() => {
+										console.log('facebook')
+									}}
+									style={{
+										backgroundColor: '#3b5998',
+										color: 'white',
+										height: '55px',
+										width: '55px',
+									}}
+									variant="contained"
+								>
+									<GitHubIcon />
+								</Button>
+							</Link>
+							<Link to="https://twitter.com/AndrijCikulaj">
+								<Button
+									onClick={() => {
+										console.log('twitter')
+									}}
+									style={{
+										backgroundColor: '#00acee',
+										color: 'white',
+										height: '55px',
+										width: '55px',
+									}}
+									variant="contained"
+								>
+									<TwitterIcon />
+								</Button>
+							</Link>
+							<Link to="https://www.linkedin.com/in/andrii-chykulai">
+								<Button
+									onClick={() => {
+										console.log('linkedin')
+									}}
+									style={{
+										backgroundColor: '#0e76a8',
+										color: 'white',
+										height: '55px',
+										width: '55px',
+									}}
+									variant="contained"
+								>
+									<LinkedInIcon />
+								</Button>
+							</Link>
+						</Stack>
+					</Stack>
+				</Grid>
+			</Grid>
+		</Box>
+	)
 }
