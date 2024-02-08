@@ -1,5 +1,5 @@
-export { notifySuccess } from "./notifySuccess";
-export { notifyError } from "./notifyError";
-export { setItemToStorage, getItemFromStorage, removeItemFromStorage } from "./utils/localStorage";
-export { Error404 } from "./errors/404";
-export { SearchBtn } from "./SearchBtn";
+export { SearchBtn } from './SearchBtn'
+export { Error404 } from './errors/404'
+export { notifyError } from './notifyError'
+export { notifySuccess } from './notifySuccess'
+export { getItemFromStorage, removeItemFromStorage, setItemToStorage } from './utils/localStorage'

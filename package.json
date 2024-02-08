@@ -2,6 +2,9 @@
   "name": "location-info",
   "version": "0.1.0",
   "private": true,
+  "bugs": {
+    "url": "https://github.com/Naumetsdmytro/location-info/issues"
+  }
   "dependencies": {
     "@emotion/react": "^11.11.3",
     "@emotion/styled": "^11.11.0",
@@ -41,17 +44,17 @@
     "yup": "^1.3.3"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
+		"start": "react-scripts start",
+    "clear": "rm -rf build && rm -rf node_modules && rm -rf package-lock.json rm -rf .gitignore && rm -rf .prettierrc && rm -rf .prettierignore",
+    "prebuild": "npm run clear && echo Clearing the build folder",
+		"build": "react-scripts build",
+		"test": "react-scripts test",
+		"eject": "react-scripts eject",
+		"lint": "eslint src --ext .ts,.tsx",
+		"lint:fix": "eslint src --ext .ts,.tsx --fix",
+		"format": "prettier --write \"src/**/*.{js,jsx,ts,tsx,json,css,scss,md}\"",
+    "type-check": "tsc --noEmit"
+	},
   "proxy": "http://localhost:5001",
   "browserslist": {
     "production": [

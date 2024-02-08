@@ -1,11 +1,11 @@
-import {toast} from "react-toastify";
+import { toast } from 'react-toastify'
 
 export const notifyError = (error: Error): void => {
-  toast.error(error.message, {
-    position: 'top-right',
-    autoClose: 3000,
-    hideProgressBar: false,
-    closeOnClick: true,
-    draggable: true
-  })
+	toast.error(error.message, {
+		autoClose: 3000,
+		closeOnClick: true,
+		draggable: true,
+		hideProgressBar: false,
+		position: 'top-right',
+	})
 }

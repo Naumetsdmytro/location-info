@@ -1,7 +1,8 @@
-import React, { Fragment } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
-import { useAuthContext } from '../../features/auth'
+import React, { Fragment } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
+
+import { useAuthContext } from '../../features/auth'
 import { getItemFromStorage } from '../../shared'
 import logo from '../assets/location-info-logo.png'
 
@@ -22,11 +23,11 @@ export const NavLayout = ({ children }: Props) => {
 	const location = useLocation()
 
 	const navigation = [
-		{ name: 'Main', href: '/main', current: location.pathname === '/main' },
+		{ current: location.pathname === '/main', href: '/main', name: 'Main' },
 		{
-			name: 'Favourites',
-			href: '/favourites',
 			current: location.pathname === '/favourites',
+			href: '/favourites',
+			name: 'Favourites',
 		},
 	]
 
@@ -37,23 +38,15 @@ export const NavLayout = ({ children }: Props) => {
 
 	return (
 		<>
-			<Disclosure as="nav" className="bg-transparent w-full">
+			<Disclosure as="nav" className="w-full">
 				<>
 					<div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
 						<div className="relative flex h-16 items-center justify-between">
 							<div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
 								<div className="flex flex-shrink-0 items-center">
 									<Link to="/main">
-										<img
-											className="block lg:hidden h-10 w-auto"
-											src={logo}
-											alt="Location Info"
-										/>
-										<img
-											className="hidden lg:block h-10 w-auto"
-											src={logo}
-											alt="Location Info"
-										/>
+										<img alt="Location Info" className="block lg:hidden h-10 w-auto" src={logo} />
+										<img alt="Location Info" className="hidden lg:block h-10 w-auto" src={logo} />
 									</Link>
 								</div>
 								{isAuthenticated && (
@@ -61,15 +54,15 @@ export const NavLayout = ({ children }: Props) => {
 										<div className="flex space-x-4">
 											{navigation.map(item => (
 												<Link
-													key={item.name}
-													to={item.href}
+													aria-current={item.current ? 'page' : undefined}
 													className={classNames(
 														item.current
 															? 'bg-gray-900 text-white'
 															: 'text-gray-900 hover:bg-gray-700 hover:text-white',
 														'rounded-md px-3 py-2 text-sm font-medium',
 													)}
-													aria-current={item.current ? 'page' : undefined}
+													key={item.name}
+													to={item.href}
 												>
 													{item.name}
 												</Link>
@@ -82,9 +75,7 @@ export const NavLayout = ({ children }: Props) => {
 								<div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
 									<Menu as="div" className="relative ml-3">
 										<Menu.Button className="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
-											<span className="text-white font-bold px-3 py-2">
-												{user.fullName}
-											</span>
+											<span className="text-white font-bold px-3 py-2">{user.fullName}</span>
 										</Menu.Button>
 										<Transition
 											as={Fragment}
@@ -95,15 +86,15 @@ export const NavLayout = ({ children }: Props) => {
 											leaveFrom="transform opacity-100 scale-100"
 											leaveTo="transform opacity-0 scale-95"
 										>
-											<Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+											<Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none z-50">
 												<Menu.Item>
 													{({ active }) => (
 														<Link
-															to="#"
 															className={classNames(
 																active ? 'bg-gray-100' : '',
 																'block px-4 py-2 text-sm text-gray-700',
 															)}
+															to="#"
 														>
 															Your Profile
 														</Link>
@@ -112,25 +103,12 @@ export const NavLayout = ({ children }: Props) => {
 												<Menu.Item>
 													{({ active }) => (
 														<Link
-															to="#"
-															className={classNames(
-																active ? 'bg-gray-100' : '',
-																'block px-4 py-2 text-sm text-gray-700',
-															)}
-														>
-															Settings
-														</Link>
-													)}
-												</Menu.Item>
-												<Menu.Item>
-													{({ active }) => (
-														<Link
-															to="/"
 															className={classNames(
 																active ? 'bg-gray-100' : '',
 																'block px-4 py-2 text-sm text-gray-700',
 															)}
 															onClick={onLogout}
+															to="/"
 														>
 															Sign out
 														</Link>
@@ -144,20 +122,20 @@ export const NavLayout = ({ children }: Props) => {
 								<div className="hidden sm:ml-6 sm:block">
 									<div className="flex space-x-4">
 										<Link
-											to="/auth/login"
 											className={classNames(
 												'text-gray-900 hover:bg-gray-700 hover:text-white',
 												'rounded-md px-3 py-2 text-sm font-medium',
 											)}
+											to="/auth/login"
 										>
 											Login
 										</Link>
 										<Link
-											to="/auth/register"
 											className={classNames(
 												'text-gray-900 hover:bg-gray-700 hover:text-white',
 												'rounded-md px-3 py-2 text-sm font-medium',
 											)}
+											to="/auth/register"
 										>
 											Register
 										</Link>
@@ -171,16 +149,16 @@ export const NavLayout = ({ children }: Props) => {
 						<div className="space-y-1 px-2 pb-3 pt-2">
 							{navigation.map(item => (
 								<Disclosure.Button
-									key={item.name}
+									aria-current={item.current ? 'page' : undefined}
 									as="a"
-									href={item.href}
 									className={classNames(
 										item.current
 											? 'bg-gray-900 text-white'
 											: 'text-gray-300 hover:bg-gray-700 hover:text-white',
 										'block rounded-md px-3 py-2 text-base font-medium',
 									)}
-									aria-current={item.current ? 'page' : undefined}
+									href={item.href}
+									key={item.name}
 								>
 									{item.name}
 								</Disclosure.Button>

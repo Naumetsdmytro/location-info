@@ -1,13 +1,17 @@
-import { useEffect, useState, useRef } from 'react'
-import { useParams } from 'react-router-dom'
+import React, { useEffect, useRef, useState } from 'react'
+import { Box, Divider, List, ListItem, ListItemText, Paper, Typography } from '@mui/material'
+import slugify from '@sindresorhus/slugify'
 import L from 'leaflet'
 import 'leaflet/dist/leaflet.css'
-import { PlaceData } from './model/models'
-import { Box, Paper, Typography, List, Divider, ListItem, ListItemText } from '@mui/material'
-import ReactDOMServer from 'react-dom/server'
-import slugify from '@sindresorhus/slugify'
+import { useParams } from 'react-router-dom'
 import stringSimilarity from 'string-similarity'
 import Marker1 from './assets/pin (1).png'
+import { PlaceData } from './model/models'
+import ReactDOMServer from 'react-dom/server'
+
+interface ApiResponse {
+	items: PlaceData[]
+}
 
 const removeDuplicates = (array: PlaceData[]): PlaceData[] => {
 	return array.filter(
@@ -25,17 +29,17 @@ const customMarkerIcon2x = 'https://i.ibb.co/L5QYtj1/big-Location-Icon.png'
 
 const customIcon = L.icon({
 	iconRetinaUrl: Marker1,
-	iconUrl: customMarkerIcon2x,
 	iconSize: [30, 30],
+	iconUrl: customMarkerIcon2x,
 })
 
 export const Category = () => {
 	const [places, setPlaces] = useState<PlaceData[]>([])
-	const { categoryName } = useParams()
-	const mapRef = useRef<HTMLDivElement>(null!)
+	const { categoryName } = useParams<{ categoryName?: string }>()
+	const mapRef = useRef<HTMLDivElement>(null)
 
 	useEffect(() => {
-		const map = L.map(mapRef.current, {
+		const map = L.map(mapRef.current!, {
 			center: [49.0119, 24.3731],
 			zoom: 12,
 		})
@@ -51,7 +55,7 @@ export const Category = () => {
 			const response = await fetch(
 				`https://discover.search.hereapi.com/v1/discover?at=49.0119,24.3731&q=${categoryName}&apiKey=${api}`,
 			)
-			const { items } = await response.json()
+			const { items } = (await response.json()) as ApiResponse
 
 			console.log(items)
 
@@ -63,8 +67,8 @@ export const Category = () => {
 
 			uniqueItems.forEach((item: PlaceData) => {
 				const popupContent = ReactDOMServer.renderToString(
-					<Paper style={{ padding: '8px', borderRadius: '4px' }} elevation={3}>
-						<Typography variant="subtitle1" component="strong">
+					<Paper elevation={3} style={{ borderRadius: '4px', padding: '8px' }}>
+						<Typography component="strong" variant="subtitle1">
 							{item.title}
 						</Typography>
 						<Typography variant="body2">{item.address.label}</Typography>
@@ -79,79 +83,83 @@ export const Category = () => {
 			})
 		}
 
-		fetchPlaces()
+		fetchPlaces().catch(error => console.error(error))
 
-		map.locate({ setView: true, maxZoom: 16 })
+		map.locate({ maxZoom: 16, setView: true })
 		map.on('locationfound', function (e) {
-			L.marker(e.latlng).addTo(map).bindPopup('You are here!')
+			const radius = e.accuracy / 1
+			L.circle(e.latlng, radius).addTo(map).bindPopup('You are here').openPopup()
 		})
 
 		return () => {
 			map.off('locationfound')
 			map.remove()
 		}
-	}, [categoryName])
+	}, [categoryName || ''])
 
 	return (
 		<Box
 			sx={{
-				display: 'flex',
+				backgroundColor: '#f0f0f0',
 				borderRadius: '10px',
+				display: 'flex',
+				height: '90vh',
 				margin: '0 auto',
 				padding: '25px',
-				backgroundColor: '#f0f0f0',
-				height: '90vh',
 			}}
 		>
 			<Box
 				sx={{
-					width: '30%',
-					overflowY: 'auto',
 					borderColor: 'divider',
+					overflowY: 'auto',
+					width: '30%',
 				}}
 			>
 				<Typography
-					variant="h6"
 					component="div"
 					sx={{
+						backgroundColor: 'primary.main',
+						borderRadius: '10px 10px 0 0',
+						color: 'primary.contrastText',
+						fontWeight: 'bold',
+						p: 2,
 						position: 'sticky',
 						top: 0,
 						zIndex: 1100,
-						fontWeight: 'bold',
-						p: 2,
-						backgroundColor: 'primary.main',
-						color: 'primary.contrastText',
-						borderRadius: '10px 10px 0 0',
 					}}
+					variant="h6"
 				>
-					{categoryName?.toUpperCase() + ' Near You'}
+					{(categoryName ? categoryName.toUpperCase() : '') + ' Near You'}
 				</Typography>
 				<List
 					sx={{ backgroundColor: '#fff', borderRadius: '10px' }}
 					component="nav"
 					aria-label="mailbox folders"
+					component="nav"
+					sx={{ backgroundColor: '#fff', borderRadius: '0 0 10px 10px' }}
 				>
 					{places.map((place, index) => (
-						<>
-							<ListItem key={place.id}>
+						<React.Fragment key={place.id}>
+							<ListItem>
 								<ListItemText
 									primary={place.title}
 									secondary={place.distance + 'm' + ' ' + 'away'}
 								/>
 							</ListItem>
 							{index < places.length - 1 && <Divider />}
-						</>
+						</React.Fragment>
 					))}
 				</List>
 			</Box>
 			<Box
 				ref={mapRef}
 				sx={{
+					zIndex: 0,
+					borderRadius: '10px',
 					flexGrow: 1,
 					height: '100%',
-					width: '70%',
 					marginLeft: '10px',
-					borderRadius: '10px',
+					width: '70%',
 				}}
 			></Box>
 		</Box>

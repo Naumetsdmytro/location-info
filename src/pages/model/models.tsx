@@ -1,13 +1,13 @@
 export interface PlaceData {
-  title: string,
-  id: string,
-  position: {
-    lat: number,
-    lng: number
-  },
-  distance: string,
-  vicinity: string,
-  address: {
-    label: string
-  }
+	address: {
+		label: string
+	}
+	distance: string
+	id: string
+	position: {
+		lat: number
+		lng: number
+	}
+	title: string
+	vicinity: string
 }
