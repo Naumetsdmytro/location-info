@@ -127,7 +127,7 @@ export const Category = () => {
 					{categoryName?.toUpperCase() + ' Near You'}
 				</Typography>
 				<List
-					sx={{ backgroundColor: '#fff', borderRadius: '0 0 10px 10px' }}
+					sx={{ backgroundColor: '#fff', borderRadius: '10px' }}
 					component="nav"
 					aria-label="mailbox folders"
 				>
