@@ -87,7 +87,7 @@ export const Category = () => {
 
 		map.locate({ maxZoom: 16, setView: true })
 		map.on('locationfound', function (e) {
-			const radius = e.accuracy / 2
+			const radius = e.accuracy / 1
 			L.circle(e.latlng, radius).addTo(map).bindPopup('You are here').openPopup()
 		})
 
@@ -152,6 +152,7 @@ export const Category = () => {
 			<Box
 				ref={mapRef}
 				sx={{
+					zIndex: 0,
 					borderRadius: '10px',
 					flexGrow: 1,
 					height: '100%',

@@ -38,7 +38,7 @@ export const NavLayout = ({ children }: Props) => {
 
 	return (
 		<>
-			<Disclosure as="nav" className="w-full  ">
+			<Disclosure as="nav" className="w-full">
 				<>
 					<div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
 						<div className="relative flex h-16 items-center justify-between">
@@ -86,7 +86,7 @@ export const NavLayout = ({ children }: Props) => {
 											leaveFrom="transform opacity-100 scale-100"
 											leaveTo="transform opacity-0 scale-95"
 										>
-											<Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+											<Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none z-50">
 												<Menu.Item>
 													{({ active }) => (
 														<Link
@@ -97,19 +97,6 @@ export const NavLayout = ({ children }: Props) => {
 															to="#"
 														>
 															Your Profile
-														</Link>
-													)}
-												</Menu.Item>
-												<Menu.Item>
-													{({ active }) => (
-														<Link
-															className={classNames(
-																active ? 'bg-gray-100' : '',
-																'block px-4 py-2 text-sm text-gray-700',
-															)}
-															to="#"
-														>
-															Settings
 														</Link>
 													)}
 												</Menu.Item>
