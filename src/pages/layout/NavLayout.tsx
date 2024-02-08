@@ -1,10 +1,11 @@
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import React, { Fragment } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
-
-import { useAuthContext } from '../../features/auth'
-import { getItemFromStorage } from '../../shared'
 import logo from '../assets/location-info-logo.png'
+import { useSelector } from 'react-redux'
+import { selectIsLogedIn, selectUserName } from '../../redux/auth/selectors'
+import { useDispatch } from 'react-redux'
+import { logout } from '../../redux/auth/operations'
 
 interface Props {
 	children: React.ReactNode
@@ -15,11 +16,11 @@ const classNames = (...classes: string[]) => {
 }
 
 export const NavLayout = ({ children }: Props) => {
+	const isLoggedIn = useSelector(selectIsLogedIn)
+	const dispatch = useDispatch()
+
 	const navigate = useNavigate()
-	const { isAuthenticated } = useAuthContext()
-	const userData = getItemFromStorage('userData')
-	const user = userData ? userData.user : null
-	const auth = useAuthContext()
+	const user = useSelector(selectUserName)
 	const location = useLocation()
 
 	const navigation = [
@@ -32,8 +33,14 @@ export const NavLayout = ({ children }: Props) => {
 	]
 
 	const onLogout = () => {
-		auth.logout()
-		navigate('/')
+		try {
+			dispatch(logout() as any )
+			navigate('/')
+		} catch (e: unknown) {
+			if (e instanceof Error) {
+				console.error(e.message)
+			}
+		}
 	}
 
 	return (
@@ -49,7 +56,7 @@ export const NavLayout = ({ children }: Props) => {
 										<img alt="Location Info" className="hidden lg:block h-10 w-auto" src={logo} />
 									</Link>
 								</div>
-								{isAuthenticated && (
+								{isLoggedIn && (
 									<div className="hidden sm:ml-6 sm:block">
 										<div className="flex space-x-4">
 											{navigation.map(item => (
@@ -71,11 +78,11 @@ export const NavLayout = ({ children }: Props) => {
 									</div>
 								)}
 							</div>
-							{isAuthenticated ? (
+							{isLoggedIn ? (
 								<div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
 									<Menu as="div" className="relative ml-3">
 										<Menu.Button className="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
-											<span className="text-white font-bold px-3 py-2">{user.fullName}</span>
+											<span className="text-white font-bold px-3 py-2">{user.firstName} {''} {user.lastName}</span>
 										</Menu.Button>
 										<Transition
 											as={Fragment}

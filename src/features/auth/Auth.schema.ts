@@ -21,11 +21,6 @@ export const LoginSchema = yup.object().shape({
 })
 
 export const SignUpSchema = yup.object().shape({
-	[Fields.confirmPassword]: yup
-		.string()
-		.required(errorMessages.required)
-		.oneOf([yup.ref(Fields.password)], errorMessages.match)
-		.trim(),
 	[Fields.email]: yup
 		.string()
 		.required(errorMessages.required)

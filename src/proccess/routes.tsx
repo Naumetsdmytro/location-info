@@ -9,8 +9,8 @@ import { Category } from '../pages'
 import { NavLayout } from '../pages/layout/NavLayout'
 import { Error404 } from '../shared'
 
-export const useRoutes = (isAuthenticated: boolean) => {
-	if (isAuthenticated) {
+export const useRoutes = (isLoggedIn: boolean) => {
+	if (isLoggedIn) {
 		return (
 			<NavLayout>
 				<Routes>

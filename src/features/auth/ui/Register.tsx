@@ -3,29 +3,21 @@ import React from 'react'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { Button } from '@mui/material'
 import { TextField, Typography } from '@mui/material'
-import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { Link, useNavigate } from 'react-router-dom'
 import { ToastContainer } from 'react-toastify'
-import { notifySuccess } from '../../../shared'
-import { notifyError } from '../../../shared'
-import { Loader } from '../../../shared/Loader'
 import { SignUpSchema } from '../Auth.schema'
-import { useRequest } from '../hooks/useRequest'
 import { getErrorMessage } from '../lib/getError'
 import { Fields } from '../model/constants'
 import { FORM_LABELS } from '../model/constants'
 import { RegisterData } from '../model/models'
-import { UseFormRegisterReturn } from 'react-hook-form'
-
-type Response = {
-	status: number
-}
+import { useDispatch } from 'react-redux'
+import { register as registerAction } from '../../../redux'
 
 export const Register = () => {
-	const navigate = useNavigate()
+	const dispatch = useDispatch()
 
-	type RegisterReturnType = UseFormRegisterReturn<string>
+	const navigate = useNavigate()
 
 	const {
 		formState: { errors },
@@ -35,40 +27,20 @@ export const Register = () => {
 		resolver: yupResolver(SignUpSchema),
 	})
 
-	const { error, loading, request } = useRequest()
-
-	useEffect(() => {
-		if (error) {
-			notifyError(error)
-		}
-	}, [error])
-
-	if (loading) {
-		return <Loader />
-	}
-
 	const onSubmit = async (data: RegisterData): Promise<void> => {
 		try {
-			const response: Response = await request(
-				'/auth/register',
-				'POST',
-				{
-					email: data.email,
-					firstName: data.firstName,
-					lastName: data.lastName,
-					password: data.password,
-				},
-				{},
-			)
-			if (response.status === 200) {
-				navigate('/auth/login')
-				notifySuccess('Success sign up')
-			}
+			dispatch(registerAction({
+				email: data.email,
+				firstName: data.firstName,
+				lastName: data.lastName,
+				password: data.password,
+			}) as any)
 		} catch (e: unknown) {
 			if (e instanceof Error) {
 				console.error(e.message)
 			}
 		}
+		navigate('/auth/login')
 	}
 
 	return (
@@ -88,7 +60,7 @@ export const Register = () => {
 					<div className="flex flex-col w-[300px]">
 						<TextField
 							error={!!errors.firstName}
-							{...(register(Fields.firstName) as RegisterReturnType)}
+							{...register(Fields.firstName)}
 							className="mb-4"
 							fullWidth
 							helperText={getErrorMessage(Fields.firstName, errors)}
@@ -99,7 +71,7 @@ export const Register = () => {
 						/>
 						<TextField
 							error={!!errors.lastName}
-							{...(register(Fields.lastName) as RegisterReturnType)}
+							{...register(Fields.lastName)}
 							className="mb-4"
 							fullWidth
 							helperText={getErrorMessage(Fields.lastName, errors)}
@@ -126,17 +98,6 @@ export const Register = () => {
 							fullWidth
 							helperText={getErrorMessage(Fields.password, errors)}
 							label={FORM_LABELS[Fields.password]}
-							margin="normal"
-							type="password"
-							variant="outlined"
-						/>
-						<TextField
-							error={!!errors.confirmPassword}
-							{...register('confirmPassword')}
-							className="mb-4"
-							fullWidth
-							helperText={getErrorMessage(Fields.confirmPassword, errors)}
-							label={FORM_LABELS[Fields.confirmPassword]}
 							margin="normal"
 							type="password"
 							variant="outlined"

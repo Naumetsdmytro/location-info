@@ -4,7 +4,6 @@ export interface LoginData {
 }
 
 export interface RegisterData {
-	confirmPassword: string
 	email: string
 	firstName: string
 	lastName: string

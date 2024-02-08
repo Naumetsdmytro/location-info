@@ -6,8 +6,6 @@ export const getErrorMessage = (fields: Fields, errors: any) => {
 			return errors.email?.message
 		case Fields.password:
 			return errors.password?.message
-		case Fields.confirmPassword:
-			return errors.confirmPassword?.message
 		case Fields.firstName:
 			return errors.firstName?.message
 		case Fields.lastName:

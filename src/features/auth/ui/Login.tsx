@@ -1,24 +1,22 @@
 import React from 'react'
 
 import { yupResolver } from '@hookform/resolvers/yup'
-import { Box, Button, Grid, Stack, TextField, Typography } from '@mui/material'
-import { useEffect } from 'react'
+import { Box, Button, TextField, Typography } from '@mui/material'
 import { useForm } from 'react-hook-form'
 import { Link, useNavigate } from 'react-router-dom'
 import { ToastContainer } from 'react-toastify'
-import { notifyError } from '../../../shared'
-import { Loader } from '../../../shared/Loader'
 import { LoginSchema } from '../Auth.schema'
-import { useAuthContext } from '../context/AuthContext'
-import { useRequest } from '../hooks/useRequest'
 import { getErrorMessage } from '../lib/getError'
 import { Fields } from '../model/constants'
 import { FORM_LABELS } from '../model/constants'
 import { LoginData } from '../model/models'
+import { useDispatch } from 'react-redux'
+import { login } from '../../../redux'
 
 export const Login = () => {
+	const dispatch = useDispatch()
+
 	const navigate = useNavigate()
-	const auth = useAuthContext()
 
 	const {
 		formState: { errors },
@@ -28,35 +26,26 @@ export const Login = () => {
 		resolver: yupResolver(LoginSchema),
 	})
 
-	const { error, loading, request } = useRequest()
-
-	useEffect(() => {
-		if (error) {
-			notifyError(error)
-		}
-	}, [error])
-
-	if (loading) {
-		return <Loader />
-	}
-
 	const onSubmit = async (data: LoginData): Promise<void> => {
 		try {
-			const response = await request(
-				'/auth/login',
-				'POST',
-				{ email: data.email, password: data.password },
-				{},
+			dispatch(
+				login({
+					email: data.email,
+					password: data.password,
+				}) as any,
 			)
-			auth.login(response.token, response.user)
-			navigate('/main')
-		} catch (e: any) {
-			notifyError(e.message)
-			console.log(e)
+		} catch (e: unknown) {
+			if (e instanceof Error) {
+				console.error(e.message)
+				return
+			}
 		}
+		navigate('/main')
 	}
 
-	const onGoogleLogin = (): void => {}
+	const onGoogleLogin = (): void => {
+		console.log('google login')
+	}
 
 	const onFacebookLogin = (): void => {
 		console.log('facebook login')
