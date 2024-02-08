@@ -135,8 +135,6 @@ export const Category = () => {
 					sx={{ backgroundColor: '#fff', borderRadius: '10px' }}
 					component="nav"
 					aria-label="mailbox folders"
-					component="nav"
-					sx={{ backgroundColor: '#fff', borderRadius: '0 0 10px 10px' }}
 				>
 					{places.map((place, index) => (
 						<React.Fragment key={place.id}>

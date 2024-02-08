@@ -10,13 +10,13 @@ import {
 } from "redux-persist";
 import { AuthState } from "./auth/authSlice";
 
-export type RootState = {
-    auth: AuthState
-}
-
 
 
 import { persistedAuthReducer } from "./auth/authSlice";
+
+export type RootState = {
+    auth: AuthState
+}
 
 export const store = configureStore({
   reducer: {
