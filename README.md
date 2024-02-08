@@ -12,8 +12,9 @@
 ### This app is using:
 1. React + hooks
 2. TypeScript
-3. Redux
+3. Redux-toolkit
 4. Material-UI
+5. Geolocation
 
 ### This app is also using :
 1. NodeJS
