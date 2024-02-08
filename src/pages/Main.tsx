@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
 import { Box, Grid, Stack, Typography } from '@mui/material'
 import { useInView } from 'react-intersection-observer'

@@ -1,24 +1,25 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
-import { AuthContext } from './features/auth/context/AuthContext'
-import { useAuth } from './features/auth/hooks/useAuth'
 import { useRoutes } from './proccess/routes'
 import { ThemeState } from './shared/hooks/useTheme'
+import { useSelector } from 'react-redux'
+import { selectIsLogedIn, selectIsRefreshing } from './redux/auth/selectors'
+import { useDispatch } from 'react-redux'
+import { refreshUser } from './redux'
+import { Loader } from './shared/Loader'
 
 const App = () => {
-	const { login, logout, token, user } = useAuth()
-	const isAuthenticated = !!token
-	const routes = useRoutes(isAuthenticated)
+	const isLoggedIn = useSelector(selectIsLogedIn)
+	const routes = useRoutes(isLoggedIn)
+	const isRefreshing = useSelector(selectIsRefreshing)
 
-	return (
-		<>
-			<AuthContext.Provider
-				value={{ isAuthenticated, login, logout, token, user: { email: '', fullName: '' } }}
-			>
-				<ThemeState>{routes}</ThemeState>
-			</AuthContext.Provider>
-		</>
-	)
+	const dispatch = useDispatch()
+
+	useEffect(() => {
+		dispatch(refreshUser() as any)
+	}, [dispatch])
+
+	return isRefreshing ? <Loader /> : <ThemeState>{routes}</ThemeState>
 }
 
 export default App

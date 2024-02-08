@@ -1,5 +1,4 @@
 export enum Fields {
-	confirmPassword = 'confirmPassword',
 	email = 'email',
 	firstName = 'firstName',
 	lastName = 'lastName',
@@ -7,7 +6,6 @@ export enum Fields {
 }
 
 export const FORM_LABELS = {
-	[Fields.confirmPassword]: 'Confirm Password',
 	[Fields.email]: 'Email',
 	[Fields.firstName]: 'First Name',
 	[Fields.lastName]: 'Last Name',
@@ -15,7 +13,6 @@ export const FORM_LABELS = {
 }
 
 export const initialValues = {
-	[Fields.confirmPassword]: '',
 	[Fields.email]: '',
 	[Fields.firstName]: '',
 	[Fields.lastName]: '',
