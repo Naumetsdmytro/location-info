@@ -191,14 +191,3 @@ export const Category = () => {
 		</Box>
 	)
 }
-
-// const selectFilteredProductsByName = createSelector(
-//     [selectProducts, selectSearchTextValue],
-//     (products, filterValue) => {
-//       const normalizedFilter = filterValue.toLowerCase();
-//       return products.filter(({ name }) =>
-//         name.toLowerCase().includes(normalizedFilter)
-//       );
-//     }
-//   );
-  
