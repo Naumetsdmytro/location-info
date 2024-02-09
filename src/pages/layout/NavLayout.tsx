@@ -34,7 +34,7 @@ export const NavLayout = ({ children }: Props) => {
 
 	const onLogout = () => {
 		try {
-			dispatch(logout() as any )
+			dispatch(logout() as any)
 			navigate('/')
 		} catch (e: unknown) {
 			if (e instanceof Error) {
@@ -82,7 +82,9 @@ export const NavLayout = ({ children }: Props) => {
 								<div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
 									<Menu as="div" className="relative ml-3">
 										<Menu.Button className="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
-											<span className="text-white font-bold px-3 py-2">{user.firstName} {''} {user.lastName}</span>
+											<span className="text-white font-bold px-3 py-2">
+												{user.firstName} {''} {user.lastName}
+											</span>
 										</Menu.Button>
 										<Transition
 											as={Fragment}
