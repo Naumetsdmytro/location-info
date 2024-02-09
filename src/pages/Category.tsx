@@ -41,10 +41,12 @@ export const Category = () => {
 	const mapRef = useRef<HTMLDivElement>(null)
 
 	useEffect(() => {
-		const map = L.map(mapRef.current!, {
-			center: [49.0119, 24.3731],
-			zoom: 12,
-		})
+        const map = L.map(mapRef.current!, {
+            center: [49.0119, 24.3731],
+            zoom: 12,
+            scrollWheelZoom: true,
+            touchZoom: true,
+          });
 
 		const hereTileUrl = `https://{s}.base.maps.ls.hereapi.com/maptile/2.1/maptile/newest/normal.day/{z}/{x}/{y}/256/png8?apiKey=${api}&ppi=320`
 		const hereTiles = L.tileLayer(hereTileUrl, {
@@ -61,10 +63,7 @@ export const Category = () => {
 
 			const uniqueItems = removeDuplicates(items)
 
-            const filteredItems = uniqueItems.filter(({title}) => {
-                const normalizedFilter = searchValue.toLowerCase();
-                return title.toLowerCase().includes(normalizedFilter)
-            })
+            const filteredItems = uniqueItems.filter(({title}) => title.toLowerCase().includes(searchValue))
 
 			setPlaces(filteredItems)
 
@@ -82,13 +81,19 @@ export const Category = () => {
 				const marker = L.marker([item.position.lat, item.position.lng], {
 					icon: customIcon,
 				}).addTo(map)
+
 				marker.bindPopup(popupContent)
+
+                marker.on('click', () => {
+                    map.setView([item.position.lat, item.position.lng], 16);
+                });
 			})
 		}
 
-		fetchPlaces().catch(error => console.error(error))
+		fetchPlaces()
 
 		map.locate({ maxZoom: 16, setView: true })
+        
 		map.on('locationfound', function (e) {
 			const radius = e.accuracy / 1
 			L.circle(e.latlng, radius).addTo(map).bindPopup('You are here').openPopup()
@@ -148,7 +153,7 @@ export const Category = () => {
                         placeholder="I'm looking for..."
                         inputProps={{ 'aria-label': 'search store' }}
                         value={searchValue}
-                        onChange={(evt: React.ChangeEvent<HTMLInputElement>) => setSearchValue(evt.target.value)}
+                        onChange={(evt: React.ChangeEvent<HTMLInputElement>) => setSearchValue(evt.target.value.toLocaleLowerCase())}
                     />
                     <IconButton
                         type="submit"
