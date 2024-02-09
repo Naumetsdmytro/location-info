@@ -49,8 +49,6 @@ export const Login = () => {
 		return <Loader />
 	}
 
-	console.log('isLoading', isLoading)
-
 	const onGoogleLogin = (): void => {
 		console.log('google login')
 	}

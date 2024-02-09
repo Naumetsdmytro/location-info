@@ -75,7 +75,7 @@ export const logout = createAsyncThunk<
 })
 
 export const refreshUser = createAsyncThunk<
-	User,
+	LogInActionPayload,
 	void,
 	{
 		state: RootState

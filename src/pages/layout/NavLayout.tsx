@@ -1,11 +1,11 @@
 import { Disclosure, Menu, Transition } from '@headlessui/react'
-import React, { Fragment } from 'react'
+import React, { Fragment, useEffect } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import logo from '../assets/location-info-logo.png'
 import { useSelector } from 'react-redux'
-import { selectIsLogedIn, selectUserName } from '../../redux/auth/selectors'
+import { selectIsLogedIn, selectUser } from '../../redux/auth/selectors'
 import { useDispatch } from 'react-redux'
-import { logout } from '../../redux/auth/operations'
+import { logout } from '../../redux'
 
 interface Props {
 	children: React.ReactNode
@@ -18,9 +18,9 @@ const classNames = (...classes: string[]) => {
 export const NavLayout = ({ children }: Props) => {
 	const isLoggedIn = useSelector(selectIsLogedIn)
 	const dispatch = useDispatch()
+	const user = useSelector(selectUser)
 
 	const navigate = useNavigate()
-	const user = useSelector(selectUserName)
 	const location = useLocation()
 
 	const navigation = [
@@ -83,7 +83,7 @@ export const NavLayout = ({ children }: Props) => {
 									<Menu as="div" className="relative ml-3">
 										<Menu.Button className="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
 											<span className="text-white font-bold px-3 py-2">
-												{user.firstName} {''} {user.lastName}
+												{user ? `${user.firstName} ${user.lastName}` : 'Loading...'}
 											</span>
 										</Menu.Button>
 										<Transition

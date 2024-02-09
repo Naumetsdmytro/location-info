@@ -1,7 +1,6 @@
 import React from 'react'
 
 import { Route, Routes } from 'react-router-dom'
-
 import { Login } from '../features/auth'
 import { Register } from '../features/auth'
 import { Home, Main } from '../pages'

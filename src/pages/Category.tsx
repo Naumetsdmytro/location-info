@@ -1,6 +1,16 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { Box, Divider, List, ListItem, ListItemText, Paper, Typography, IconButton, InputBase } from '@mui/material'
-import SearchIcon from '@mui/icons-material/Search';
+import {
+	Box,
+	Divider,
+	List,
+	ListItem,
+	ListItemText,
+	Paper,
+	Typography,
+	IconButton,
+	InputBase,
+} from '@mui/material'
+import SearchIcon from '@mui/icons-material/Search'
 import slugify from '@sindresorhus/slugify'
 import L from 'leaflet'
 import 'leaflet/dist/leaflet.css'
@@ -36,17 +46,17 @@ const customIcon = L.icon({
 
 export const Category = () => {
 	const [places, setPlaces] = useState<PlaceData[]>([])
-    const [searchValue, setSearchValue] = useState('');
+	const [searchValue, setSearchValue] = useState('')
 	const { categoryName } = useParams<{ categoryName?: string }>()
 	const mapRef = useRef<HTMLDivElement>(null)
 
 	useEffect(() => {
-        const map = L.map(mapRef.current!, {
-            center: [49.0119, 24.3731],
-            zoom: 12,
-            scrollWheelZoom: true,
-            touchZoom: true,
-          });
+		const map = L.map(mapRef.current!, {
+			center: [49.0119, 24.3731],
+			zoom: 12,
+			scrollWheelZoom: true,
+			touchZoom: true,
+		})
 
 		const hereTileUrl = `https://{s}.base.maps.ls.hereapi.com/maptile/2.1/maptile/newest/normal.day/{z}/{x}/{y}/256/png8?apiKey=${api}&ppi=320`
 		const hereTiles = L.tileLayer(hereTileUrl, {
@@ -63,7 +73,9 @@ export const Category = () => {
 
 			const uniqueItems = removeDuplicates(items)
 
-            const filteredItems = uniqueItems.filter(({title}) => title.toLowerCase().includes(searchValue))
+			const filteredItems = uniqueItems.filter(({ title }) =>
+				title.toLowerCase().includes(searchValue),
+			)
 
 			setPlaces(filteredItems)
 
@@ -84,16 +96,16 @@ export const Category = () => {
 
 				marker.bindPopup(popupContent)
 
-                marker.on('click', () => {
-                    map.setView([item.position.lat, item.position.lng], 16);
-                });
+				marker.on('click', () => {
+					map.setView([item.position.lat, item.position.lng], 16)
+				})
 			})
 		}
 
 		fetchPlaces()
 
 		map.locate({ maxZoom: 16, setView: true })
-        
+
 		map.on('locationfound', function (e) {
 			const radius = e.accuracy / 1
 			L.circle(e.latlng, radius).addTo(map).bindPopup('You are here').openPopup()
@@ -139,31 +151,29 @@ export const Category = () => {
 				>
 					{(categoryName ? categoryName.toUpperCase() : '') + ' Near You'}
 				</Typography>
-                <Box sx={{ p: "15px 0" }}>
-                <Paper
-                    sx={{
-                        p: '2px 4px',
-                        display: 'flex',
-                        alignItems: 'center',
-                        width: '100%',
-                    }}
-                >
-                    <InputBase
-                        sx={{ ml: 1, flex: 1 }}
-                        placeholder="I'm looking for..."
-                        inputProps={{ 'aria-label': 'search store' }}
-                        value={searchValue}
-                        onChange={(evt: React.ChangeEvent<HTMLInputElement>) => setSearchValue(evt.target.value.toLocaleLowerCase())}
-                    />
-                    <IconButton
-                        type="submit"
-                        sx={{ p: '10px' }}
-                        aria-label="search"
-                    >
-                        <SearchIcon />
-                    </IconButton>
-                </Paper>
-            </Box>
+				<Box sx={{ p: '15px 0' }}>
+					<Paper
+						sx={{
+							p: '2px 4px',
+							display: 'flex',
+							alignItems: 'center',
+							width: '100%',
+						}}
+					>
+						<InputBase
+							sx={{ ml: 1, flex: 1 }}
+							placeholder="I'm looking for..."
+							inputProps={{ 'aria-label': 'search store' }}
+							value={searchValue}
+							onChange={(evt: React.ChangeEvent<HTMLInputElement>) =>
+								setSearchValue(evt.target.value.toLocaleLowerCase())
+							}
+						/>
+						<IconButton type="submit" sx={{ p: '10px' }} aria-label="search">
+							<SearchIcon />
+						</IconButton>
+					</Paper>
+				</Box>
 				<List
 					sx={{ backgroundColor: '#fff', borderRadius: '10px' }}
 					component="nav"
