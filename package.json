@@ -45,7 +45,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "clear": "rm -rf build && rm -rf node_modules && rm -rf package-lock.json rm -rf .gitignore && rm -rf .prettierrc && rm -rf .prettierignore",
+    "clear": "rm -rf build",
     "prebuild": "npm run clear && echo Clearing the build folder",
     "build": "react-scripts build",
     "test": "react-scripts test",

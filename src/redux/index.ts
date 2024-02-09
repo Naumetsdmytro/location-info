@@ -2,7 +2,7 @@ export {
 	selectIsLogedIn,
 	selectIsRefreshing,
 	selectError,
-	selectUserName,
+	selectUser,
 	selectIsLoading,
 } from './auth/selectors'
 export { refreshUser, login, register, logout } from './auth/operations'
