@@ -12,10 +12,13 @@ import { Fields } from '../model/constants'
 import { FORM_LABELS } from '../model/constants'
 import { RegisterData } from '../model/models'
 import { useDispatch } from 'react-redux'
-import { register as registerAction } from '../../../redux'
+import { register as registerAction, selectIsLoading } from '../../../redux'
+import { useSelector } from 'react-redux'
+import { Loader } from '../../../shared'
 
 export const Register = () => {
 	const dispatch = useDispatch()
+	const isLoading = useSelector(selectIsLoading)
 
 	const navigate = useNavigate()
 
@@ -29,18 +32,24 @@ export const Register = () => {
 
 	const onSubmit = async (data: RegisterData): Promise<void> => {
 		try {
-			dispatch(registerAction({
-				email: data.email,
-				firstName: data.firstName,
-				lastName: data.lastName,
-				password: data.password,
-			}) as any)
+			await dispatch(
+				registerAction({
+					email: data.email,
+					firstName: data.firstName,
+					lastName: data.lastName,
+					password: data.password,
+				}) as any,
+			)
+			navigate('/auth/login')
 		} catch (e: unknown) {
 			if (e instanceof Error) {
 				console.error(e.message)
 			}
 		}
-		navigate('/auth/login')
+	}
+
+	if (isLoading) {
+		return <Loader />
 	}
 
 	return (

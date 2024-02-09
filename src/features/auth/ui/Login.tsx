@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
 import { yupResolver } from '@hookform/resolvers/yup'
 import { Box, Button, TextField, Typography } from '@mui/material'
@@ -11,10 +11,13 @@ import { Fields } from '../model/constants'
 import { FORM_LABELS } from '../model/constants'
 import { LoginData } from '../model/models'
 import { useDispatch } from 'react-redux'
-import { login } from '../../../redux'
+import { login, selectIsLoading } from '../../../redux'
+import { useSelector } from 'react-redux'
+import { Loader } from '../../../shared/Loader'
 
 export const Login = () => {
 	const dispatch = useDispatch()
+	const isLoading = useSelector(selectIsLoading)
 
 	const navigate = useNavigate()
 
@@ -28,20 +31,25 @@ export const Login = () => {
 
 	const onSubmit = async (data: LoginData): Promise<void> => {
 		try {
-			dispatch(
+			await dispatch(
 				login({
 					email: data.email,
 					password: data.password,
 				}) as any,
 			)
+			navigate('/main')
 		} catch (e: unknown) {
 			if (e instanceof Error) {
 				console.error(e.message)
-				return
 			}
 		}
-		navigate('/main')
 	}
+
+	if (isLoading) {
+		return <Loader />
+	}
+
+	console.log('isLoading', isLoading)
 
 	const onGoogleLogin = (): void => {
 		console.log('google login')
