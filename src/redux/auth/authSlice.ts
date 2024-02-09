@@ -13,6 +13,7 @@ export type AuthState = {
 	user: User
 	isLoggedIn: boolean
 	isRefreshing: boolean
+	isLoading: boolean
 	token: string | null
 	error: string | null
 }
@@ -29,6 +30,7 @@ export type LogInActionPayload = {
 const initialState: AuthState = {
 	user: { firstName: null, lastName: null, email: null },
 	isLoggedIn: false,
+    isLoading: false,
 	isRefreshing: false,
 	token: null,
 	error: null,
@@ -42,12 +44,14 @@ const authSlice = createSlice({
 		builder
 			.addCase(register.fulfilled, (state, action: PayloadAction<RegisterActionPayload>) => {
 				state.user = action.payload.user
+                state.isLoading = false
 				state.error = null
 			})
 			.addCase(login.fulfilled, (state, action: PayloadAction<LogInActionPayload>) => {
 				state.user = action.payload.user
 				state.token = action.payload.token
 				state.isLoggedIn = true
+                state.isLoading = false
 				state.error = null
 			})
 			.addCase(logout.fulfilled, state => {
@@ -65,6 +69,12 @@ const authSlice = createSlice({
 				state.isRefreshing = false
 				state.error = null
 			})
+            .addMatcher(
+				isAnyOf(register.pending, login.pending),
+				(state) => {
+					state.isLoading = true
+				},
+			)
 			.addMatcher(
 				isAnyOf(register.rejected, login.rejected, refreshUser.rejected),
 				(state, action) => {

@@ -90,7 +90,7 @@ export const refreshUser = createAsyncThunk<
 	}
 	try {
 		setAuthorizationHeader(persistedToken)
-		const { data } = await axios.get<User>('http://localhost:5001/auth/current')
+		const { data } = await axios.get('http://localhost:5001/auth/current')
 		console.log(data)
 		return data
 	} catch (error) {
