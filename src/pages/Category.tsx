@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { Box, Divider, List, ListItem, ListItemText, Paper, Typography } from '@mui/material'
+import { Box, Divider, List, ListItem, ListItemText, Paper, Typography, IconButton, InputBase } from '@mui/material'
+import SearchIcon from '@mui/icons-material/Search';
 import slugify from '@sindresorhus/slugify'
 import L from 'leaflet'
 import 'leaflet/dist/leaflet.css'
@@ -35,6 +36,7 @@ const customIcon = L.icon({
 
 export const Category = () => {
 	const [places, setPlaces] = useState<PlaceData[]>([])
+    const [searchValue, setSearchValue] = useState('');
 	const { categoryName } = useParams<{ categoryName?: string }>()
 	const mapRef = useRef<HTMLDivElement>(null)
 
@@ -57,15 +59,16 @@ export const Category = () => {
 			)
 			const { items } = (await response.json()) as ApiResponse
 
-			console.log(items)
-
 			const uniqueItems = removeDuplicates(items)
 
-			setPlaces(uniqueItems)
+            const filteredItems = uniqueItems.filter(({title}) => {
+                const normalizedFilter = searchValue.toLowerCase();
+                return title.toLowerCase().includes(normalizedFilter)
+            })
 
-			console.log(uniqueItems)
+			setPlaces(filteredItems)
 
-			uniqueItems.forEach((item: PlaceData) => {
+			filteredItems.forEach((item: PlaceData) => {
 				const popupContent = ReactDOMServer.renderToString(
 					<Paper elevation={3} style={{ borderRadius: '4px', padding: '8px' }}>
 						<Typography component="strong" variant="subtitle1">
@@ -95,7 +98,7 @@ export const Category = () => {
 			map.off('locationfound')
 			map.remove()
 		}
-	}, [categoryName || ''])
+	}, [categoryName || '', searchValue])
 
 	return (
 		<Box
@@ -131,6 +134,31 @@ export const Category = () => {
 				>
 					{(categoryName ? categoryName.toUpperCase() : '') + ' Near You'}
 				</Typography>
+                <Box sx={{ p: "15px 0" }}>
+                <Paper
+                    sx={{
+                        p: '2px 4px',
+                        display: 'flex',
+                        alignItems: 'center',
+                        width: '100%',
+                    }}
+                >
+                    <InputBase
+                        sx={{ ml: 1, flex: 1 }}
+                        placeholder="I'm looking for..."
+                        inputProps={{ 'aria-label': 'search store' }}
+                        value={searchValue}
+                        onChange={(evt: React.ChangeEvent<HTMLInputElement>) => setSearchValue(evt.target.value)}
+                    />
+                    <IconButton
+                        type="submit"
+                        sx={{ p: '10px' }}
+                        aria-label="search"
+                    >
+                        <SearchIcon />
+                    </IconButton>
+                </Paper>
+            </Box>
 				<List
 					sx={{ backgroundColor: '#fff', borderRadius: '10px' }}
 					component="nav"
@@ -163,3 +191,14 @@ export const Category = () => {
 		</Box>
 	)
 }
+
+// const selectFilteredProductsByName = createSelector(
+//     [selectProducts, selectSearchTextValue],
+//     (products, filterValue) => {
+//       const normalizedFilter = filterValue.toLowerCase();
+//       return products.filter(({ name }) =>
+//         name.toLowerCase().includes(normalizedFilter)
+//       );
+//     }
+//   );
+  
