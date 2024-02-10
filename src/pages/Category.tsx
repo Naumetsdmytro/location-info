@@ -102,7 +102,7 @@ export const Category = () => {
 			})
 		}
 
-		fetchPlaces()
+		fetchPlaces().catch(e => console.error(e))
 
 		map.locate({ maxZoom: 16, setView: true })
 
@@ -115,7 +115,7 @@ export const Category = () => {
 			map.off('locationfound')
 			map.remove()
 		}
-	}, [categoryName || '', searchValue])
+	}, [categoryName, searchValue])
 
 	return (
 		<Box

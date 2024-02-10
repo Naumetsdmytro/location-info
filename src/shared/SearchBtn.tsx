@@ -18,7 +18,7 @@ export const SearchBtn = () => {
 	}
 
 	const onSubmit = () => {
-		navigate(`/main/${input}`)
+		navigate(`/search/${input}`)
 	}
 
 	const springProps = useSpring({

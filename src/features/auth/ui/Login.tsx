@@ -37,7 +37,7 @@ export const Login = () => {
 					password: data.password,
 				}) as any,
 			)
-			navigate('/main')
+			navigate('/')
 		} catch (e: unknown) {
 			if (e instanceof Error) {
 				console.error(e.message)
