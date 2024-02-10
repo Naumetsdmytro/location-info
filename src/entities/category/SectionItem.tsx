@@ -10,7 +10,7 @@ interface Props {
 export const SectionItem = ({ icon, text }: Props) => {
 	return (
 		<Grid item lg={3} md={4} sm={6} xs={12}>
-			<Link to={text.toLowerCase()}>
+			<Link to={`/search/${text.toLowerCase()}`}>
 				<Paper
 					elevation={3}
 					sx={{

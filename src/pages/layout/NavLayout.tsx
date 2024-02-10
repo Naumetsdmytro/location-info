@@ -24,7 +24,7 @@ export const NavLayout = ({ children }: Props) => {
 	const location = useLocation()
 
 	const navigation = [
-		{ current: location.pathname === '/main', href: '/main', name: 'Main' },
+		{ current: location.pathname === '/', href: '/', name: 'Home' },
 		{
 			current: location.pathname === '/favourites',
 			href: '/favourites',
@@ -51,7 +51,7 @@ export const NavLayout = ({ children }: Props) => {
 						<div className="relative flex h-16 items-center justify-between">
 							<div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
 								<div className="flex flex-shrink-0 items-center">
-									<Link to="/main">
+									<Link to="/">
 										<img alt="Location Info" className="block lg:hidden h-10 w-auto" src={logo} />
 										<img alt="Location Info" className="hidden lg:block h-10 w-auto" src={logo} />
 									</Link>
