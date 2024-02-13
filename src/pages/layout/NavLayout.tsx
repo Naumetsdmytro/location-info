@@ -1,21 +1,18 @@
 import { Disclosure, Menu, Transition } from '@headlessui/react'
-import React, { Fragment, useEffect } from 'react'
+import React, { Fragment } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import logo from '../assets/location-info-logo.png'
 import { useSelector } from 'react-redux'
 import { selectIsLogedIn, selectUser } from '../../redux/auth/selectors'
 import { useDispatch } from 'react-redux'
 import { logout } from '../../redux'
-
-interface Props {
-	children: React.ReactNode
-}
+import type { PropsWithChildren } from 'react'
 
 const classNames = (...classes: string[]) => {
 	return classes.filter(Boolean).join(' ')
 }
 
-export const NavLayout = ({ children }: Props) => {
+export const NavLayout = ({ children }: PropsWithChildren) => {
 	const isLoggedIn = useSelector(selectIsLogedIn)
 	const dispatch = useDispatch()
 	const user = useSelector(selectUser)
@@ -95,7 +92,7 @@ export const NavLayout = ({ children }: Props) => {
 											leaveFrom="transform opacity-100 scale-100"
 											leaveTo="transform opacity-0 scale-95"
 										>
-											<Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none z-50">
+											<Menu.Items className="absolute right-0 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none z-50">
 												<Menu.Item>
 													{({ active }) => (
 														<Link
@@ -103,7 +100,7 @@ export const NavLayout = ({ children }: Props) => {
 																active ? 'bg-gray-100' : '',
 																'block px-4 py-2 text-sm text-gray-700',
 															)}
-															to="#"
+															to="/profile"
 														>
 															Your Profile
 														</Link>

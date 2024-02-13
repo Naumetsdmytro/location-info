@@ -1,13 +1,19 @@
-import FitnessCenterIcon from '@mui/icons-material/FitnessCenter'
-import HotelIcon from '@mui/icons-material/Hotel'
-import LocalHospitalIcon from '@mui/icons-material/LocalHospital'
-import MuseumIcon from '@mui/icons-material/Museum'
-import RestaurantIcon from '@mui/icons-material/Restaurant'
-import StorefrontIcon from '@mui/icons-material/Storefront'
-import { Box, Grid, Typography } from '@mui/material'
-import React from 'react'
+import {
+	Box,
+	Grid,
+	Typography,
+} from '@mui/material';
+import React from 'react';
 
-import { SectionItem } from './SectionItem'
+import FitnessCenterIcon from '@mui/icons-material/FitnessCenter';
+import HotelIcon from '@mui/icons-material/Hotel';
+import LocalHospitalIcon from '@mui/icons-material/LocalHospital';
+import MuseumIcon from '@mui/icons-material/Museum';
+import RestaurantIcon from '@mui/icons-material/Restaurant';
+import StorefrontIcon from '@mui/icons-material/Storefront';
+import CoffeeIcon from '@mui/icons-material/Coffee';
+import AttractionsIcon from '@mui/icons-material/Attractions';
+import { SectionItem } from './SectionItem';
 
 export function SectionList() {
 	const categories = [
@@ -17,23 +23,37 @@ export function SectionList() {
 		{ icon: <MuseumIcon />, text: 'Museums' },
 		{ icon: <LocalHospitalIcon />, text: 'Hospitals' },
 		{ icon: <FitnessCenterIcon />, text: 'Gyms' },
-	]
+		{ icon: <CoffeeIcon />, text: 'Cafes' },
+		{ icon: <AttractionsIcon />, text: 'Attractions' },
+	];
 
 	return (
-		<Box sx={{ backgroundColor: '#f5f5f5', flexGrow: 1, padding: 2 }}>
+		<Box
+			sx={{
+				flexGrow: 1,
+				paddingTop: '100px',
+				paddingX: '60px'
+			}}
+		>
 			<Typography
 				component="h2"
 				gutterBottom
-				sx={{ color: '#023e8a', fontSize: '2rem' }}
 				variant="h5"
+				sx={{
+					fontSize: '2rem',
+				}}
 			>
 				Recommended Categories
 			</Typography>
 			<Grid container spacing={2}>
 				{categories.map((category, index) => (
-					<SectionItem icon={category.icon} key={index} text={category.text} />
+					<SectionItem
+						icon={category.icon}
+						key={index}
+						text={category.text}
+					/>
 				))}
 			</Grid>
 		</Box>
-	)
+	);
 }
