@@ -1,5 +1,3 @@
-import React, { useEffect } from 'react'
-
 import { yupResolver } from '@hookform/resolvers/yup'
 import { Box, Button, TextField, Typography } from '@mui/material'
 import { useForm } from 'react-hook-form'
@@ -13,7 +11,7 @@ import { LoginData } from '../model/models'
 import { useDispatch } from 'react-redux'
 import { login, selectIsLoading } from '../../../redux'
 import { useSelector } from 'react-redux'
-import { Loader } from '../../../shared/Loader'
+import { Loader } from '../../../shared'
 
 export const Login = () => {
 	const dispatch = useDispatch()

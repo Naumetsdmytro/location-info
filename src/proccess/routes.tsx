@@ -5,9 +5,10 @@ import { Login } from '../features/auth'
 import { Register } from '../features/auth'
 import { Home } from '../pages'
 import { Category } from '../pages'
-import { NavLayout } from '../pages/layout/NavLayout'
+import { NavLayout } from '../pages'
 import { Error404 } from '../shared'
-import { Unauthorize } from '../shared/Unauthorize'
+import { AccessDenied } from '../shared'
+import { Profile } from '../entities/profile'
 
 export const useRoutes = (isLoggedIn: boolean) => {
 	if (isLoggedIn) {
@@ -15,6 +16,7 @@ export const useRoutes = (isLoggedIn: boolean) => {
 			<NavLayout>
 				<Routes>
 					<Route element={<Home />} path="/" />
+					<Route element={<Profile />} path="/profile" />
 					<Route element={<Category />} path="/search/:categoryName" />
 					<Route element={<Error404 />} path="*" />
 				</Routes>
@@ -32,7 +34,7 @@ export const useRoutes = (isLoggedIn: boolean) => {
 				}
 				path="/"
 			/>
-			<Route element={<Unauthorize />} path="/search/:categoryName" />
+			<Route element={<AccessDenied />} path="/search/:categoryName" />
 			<Route element={<Login />} path="/auth/login" />
 			<Route element={<Register />} path="/auth/register" />
 			<Route element={<Error404 />} path="*" />

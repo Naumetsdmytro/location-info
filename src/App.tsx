@@ -3,10 +3,11 @@ import React, { useEffect } from 'react'
 import { useRoutes } from './proccess/routes'
 import { ThemeState } from './shared/hooks/useTheme'
 import { useSelector } from 'react-redux'
-import { selectIsLogedIn, selectIsRefreshing } from './redux/auth/selectors'
+import { selectIsLogedIn, selectIsRefreshing } from './redux'
 import { useDispatch } from 'react-redux'
 import { refreshUser } from './redux'
-import { Loader } from './shared/Loader'
+import { Loader } from './shared'
+import { ToastContainer } from 'react-toastify'
 
 const App = () => {
 	const isLoggedIn = useSelector(selectIsLogedIn)
@@ -19,7 +20,10 @@ const App = () => {
 		dispatch(refreshUser() as any)
 	}, [dispatch])
 
-	return isRefreshing ? <Loader /> : <ThemeState>{routes}</ThemeState>
+	return isRefreshing ? <Loader /> : <ThemeState>
+		{routes}
+		<ToastContainer />
+	</ThemeState>
 }
 
 export default App

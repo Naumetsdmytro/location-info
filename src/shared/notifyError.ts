@@ -1,7 +1,7 @@
 import { toast } from 'react-toastify'
 
-export const notifyError = (error: Error): void => {
-	toast.error(error.message, {
+export const notifyError = (error: string): void => {
+	toast.error(error, {
 		autoClose: 3000,
 		closeOnClick: true,
 		draggable: true,
