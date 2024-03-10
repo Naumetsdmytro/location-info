@@ -1,8 +1,6 @@
 import React from 'react'
 
-import DarkModeIcon from '@mui/icons-material/DarkMode'
 import GitHubIcon from '@mui/icons-material/GitHub'
-import LightModeIcon from '@mui/icons-material/LightMode'
 import LinkedInIcon from '@mui/icons-material/LinkedIn'
 import TwitterIcon from '@mui/icons-material/Twitter'
 import { Box, Button, Divider, Grid, Stack, Typography } from '@mui/material'
@@ -10,10 +8,18 @@ import { Link } from 'react-router-dom'
 import { useTheme } from '../../shared/hooks/useTheme'
 
 export const Footer = () => {
-	const { isDark, toggleTheme } = useTheme()
+	const { isDark } = useTheme()
 
 	return (
-		<Box component="div" sx={{ paddingBottom: '30px', paddingTop: '100px', paddingX: '100px' }}>
+		<Box
+			component="div"
+			sx={{
+				paddingBottom: '30px',
+				paddingTop: '100px',
+				paddingX: '100px',
+				backgroundColor: isDark ? '#272858' : '#ffffff',
+			}}
+		>
 			<Grid container>
 				<Grid item md={12} xs={6}>
 					<Divider />
@@ -26,7 +32,7 @@ export const Footer = () => {
 					>
 						<Typography
 							sx={{
-								color: 'rgba(0, 0, 0, .5)',
+								color: isDark ? 'rgba(255, 255, 255, 1)' : 'rgba(0, 0, 0, .5)',
 								fontWeight: 100,
 								marginBottom: '5px',
 							}}
@@ -34,7 +40,6 @@ export const Footer = () => {
 						>
 							&copy; 2024 Location-info
 						</Typography>
-						<Button onClick={toggleTheme}>{isDark ? <LightModeIcon /> : <DarkModeIcon />}</Button>
 						<Stack direction="row" spacing={2}>
 							<Link to="https://github.com/Naumetsdmytro/location-info/tree/main">
 								<Button
