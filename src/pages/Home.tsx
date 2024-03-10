@@ -7,6 +7,7 @@ import { SectionList } from '../entities/category'
 import { SearchBtn } from '../shared'
 import { useTheme } from '../shared/hooks/useTheme'
 import mainImage from './assets/main.jpg'
+import nightImage from './assets/night-image.jpg'
 import { Developers } from './ui/Developers'
 import { Feedback } from './ui/Feedback'
 import { Footer } from './ui/Footer'
@@ -54,13 +55,13 @@ export const Home = () => {
 		<Box
 			component={'div'}
 			sx={{
-				backgroundColor: isDark ? '#000000' : '#ffffff',
 				display: 'flex',
 				flexDirection: 'column',
 				height: '100vh',
+				backgroundColor: isDark ? '#272858' : 'rgba(255, 255, 255, .7)',
 			}}
 		>
-			<img alt="main-page" height="50%" src={mainImage} width="100%" />
+			<img alt="main-page" height="50%" src={isDark ? nightImage : mainImage} width="100%" />
 			<Grid
 				alignItems="center"
 				container
@@ -78,7 +79,7 @@ export const Home = () => {
 					spacing={2}
 					sx={{
 						backdropFilter: 'blur(10px)',
-						backgroundColor: isDark ? 'rgba(150, 150, 150, 0.4)' : 'rgba(255, 255, 255, 0.4)',
+						backgroundColor: 'rgba(150, 150, 150, 0.4)',
 						border: '2px solid #4d4d4d',
 						borderRadius: '10px',
 						marginBottom: '20px',
@@ -87,7 +88,7 @@ export const Home = () => {
 				>
 					<Typography
 						sx={{
-							color: isDark ? 'rgba(1, 1, 1, 0.7)' : 'rgba(255, 255, 255, 0.7)',
+							color: 'rgba(1, 1, 1, 0.7)',
 						}}
 						variant={'h2'}
 					>
@@ -96,7 +97,7 @@ export const Home = () => {
 				</Stack>
 				<Typography
 					sx={{
-						color: isDark ? 'rgba(0, 100, 0)' : 'rgba(255, 255, 255)',
+						color: 'rgba(0, 100, 0)',
 						marginBottom: '10px',
 					}}
 					variant={'h3'}

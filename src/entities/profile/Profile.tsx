@@ -20,7 +20,7 @@ export const Profile = () => {
 	const handleChange = (e: any) => {
 		const { name, value } = e.target
 		setEditing(true)
-		setEditedUser((prevUser) => ({ ...prevUser, [name]: value }))
+		setEditedUser(prevUser => ({ ...prevUser, [name]: value }))
 	}
 
 	return (
@@ -69,15 +69,19 @@ export const Profile = () => {
 					disabled
 					name="email"
 				/>
-				<Typography variant="body1" sx={{ color: 'rgba(0, 0, 0, .5)' }}>You cannot change your email</Typography>
+				<Typography variant="body1" sx={{ color: 'rgba(0, 0, 0, .5)' }}>
+					You cannot change your email
+				</Typography>
 			</Stack>
-			<Stack sx={{
-				display: 'flex',
-				flexDirection: 'row',
-				justifyContent: 'center',
-				alignItems: 'center',
-				marginTop: '20px',
-			}}>
+			<Stack
+				sx={{
+					display: 'flex',
+					flexDirection: 'row',
+					justifyContent: 'center',
+					alignItems: 'center',
+					marginTop: '20px',
+				}}
+			>
 				{editing && (
 					<>
 						<Button onClick={handleSave} variant="contained" sx={{ marginRight: '10px' }}>

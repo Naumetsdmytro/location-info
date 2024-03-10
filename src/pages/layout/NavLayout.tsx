@@ -1,4 +1,5 @@
 import { Disclosure, Menu, Transition } from '@headlessui/react'
+import { Button } from '@mui/material'
 import React, { Fragment } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import logo from '../assets/location-info-logo.png'
@@ -7,6 +8,9 @@ import { selectIsLogedIn, selectUser } from '../../redux/auth/selectors'
 import { useDispatch } from 'react-redux'
 import { logout } from '../../redux'
 import type { PropsWithChildren } from 'react'
+import { useTheme } from '../../shared/hooks/useTheme'
+import LightModeIcon from '@mui/icons-material/LightMode'
+import DarkModeIcon from '@mui/icons-material/DarkMode'
 
 const classNames = (...classes: string[]) => {
 	return classes.filter(Boolean).join(' ')
@@ -16,6 +20,7 @@ export const NavLayout = ({ children }: PropsWithChildren) => {
 	const isLoggedIn = useSelector(selectIsLogedIn)
 	const dispatch = useDispatch()
 	const user = useSelector(selectUser)
+	const { isDark, toggleTheme } = useTheme()
 
 	const navigate = useNavigate()
 	const location = useLocation()
@@ -42,7 +47,11 @@ export const NavLayout = ({ children }: PropsWithChildren) => {
 
 	return (
 		<>
-			<Disclosure as="nav" className="w-full">
+			<Disclosure
+				as="nav"
+				className="w-full"
+				style={{ backgroundColor: isDark ? '#272858' : 'rgba(255, 255, 255, 1)' }}
+			>
 				<>
 					<div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
 						<div className="relative flex h-16 items-center justify-between">
@@ -61,8 +70,12 @@ export const NavLayout = ({ children }: PropsWithChildren) => {
 													aria-current={item.current ? 'page' : undefined}
 													className={classNames(
 														item.current
-															? 'bg-gray-900 text-white'
-															: 'text-gray-900 hover:bg-gray-700 hover:text-white',
+															? isDark
+																? 'bg-white text-gray-900'
+																: 'bg-gray-900 text-white'
+															: isDark
+																? 'text-white hover:bg-gray-700 hover:text-white'
+																: 'text-gray-900 hover:bg-gray-700 hover:text-white',
 														'rounded-md px-3 py-2 text-sm font-medium',
 													)}
 													key={item.name}
@@ -77,6 +90,9 @@ export const NavLayout = ({ children }: PropsWithChildren) => {
 							</div>
 							{isLoggedIn ? (
 								<div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+									<Button onClick={toggleTheme}>
+										{isDark ? <LightModeIcon /> : <DarkModeIcon />}
+									</Button>
 									<Menu as="div" className="relative ml-3">
 										<Menu.Button className="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
 											<span className="text-white font-bold px-3 py-2">

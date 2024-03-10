@@ -3,8 +3,8 @@ import React from 'react'
 import { Avatar, Box, Stack, Typography } from '@mui/material'
 import { LazyMotion, domAnimation, motion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
-
 import AndriiPhoto from '../assets/Andrii.jpg'
+import { useTheme } from '../../shared/hooks/useTheme'
 
 const developers = [
 	{
@@ -22,6 +22,8 @@ const developers = [
 ]
 
 export const Developers = () => {
+	const { isDark } = useTheme()
+
 	const [ref, inView] = useInView({
 		triggerOnce: true,
 	})
@@ -33,7 +35,7 @@ export const Developers = () => {
 			exit={{ opacity: 0 }}
 			initial={{ opacity: 0 }}
 			sx={{
-				backgroundColor: '#f0f0f0',
+				backgroundColor: isDark ? '#272858' : '#f5f5f5f5',
 				borderRadius: '20px',
 				marginX: '150px',
 				paddingY: '100px',
@@ -41,16 +43,15 @@ export const Developers = () => {
 		>
 			<Typography
 				sx={{
-					color: 'text.primary',
+					color: isDark ? 'rgba(255, 255, 255, 1)' : 'rgba(0, 0, 0, .8)',
 					fontWeight: 'bold',
 					marginTop: '40px',
 					textAlign: 'center',
+					paddingBottom: '10px',
 				}}
 				variant={'h3'}
 			>
-				<span style={{ borderBottom: '4px solid #61dafb', paddingBottom: '10px' }}>
-					This project was created by
-				</span>
+				This project was created by
 			</Typography>
 			<Stack
 				alignItems="center"
@@ -84,7 +85,7 @@ export const Developers = () => {
 						</LazyMotion>
 						<Typography
 							sx={{
-								color: 'text.primary',
+								color: isDark ? 'rgba(255, 255, 255, 1)' : 'rgba(0, 0, 0, .8)',
 								fontWeight: 'bold',
 								textAlign: 'center',
 							}}
@@ -94,7 +95,7 @@ export const Developers = () => {
 						</Typography>
 						<Typography
 							sx={{
-								color: 'text.primary',
+								color: isDark ? 'rgba(255, 255, 255, 1)' : 'rgba(0, 0, 0, .8)',
 								fontWeight: 'bold',
 								textAlign: 'center',
 							}}
@@ -105,7 +106,7 @@ export const Developers = () => {
 						<a href={developer.github} rel="noreferrer" target="_blank">
 							<Typography
 								sx={{
-									color: 'text.primary',
+									color: isDark ? 'rgba(255, 255, 255, 1)' : 'rgba(0, 0, 0, .8)',
 									fontWeight: 'bold',
 									textAlign: 'center',
 								}}

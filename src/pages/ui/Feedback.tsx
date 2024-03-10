@@ -14,10 +14,11 @@ import {
 import { useState } from 'react'
 import { animated, useSpring } from 'react-spring'
 import { ToastContainer } from 'react-toastify'
-
-import { notifySuccess } from '../../shared/notifySuccess'
+import { notifySuccess } from '../../shared'
+import { useTheme } from '../../shared/hooks/useTheme'
 
 export const Feedback = () => {
+	const { isDark } = useTheme()
 	const [clicked, setClicked] = useState(false)
 	const [email, setEmail] = useState('')
 	const [msg, setMsg] = useState('')
@@ -47,7 +48,15 @@ export const Feedback = () => {
 	}
 
 	return (
-		<Box component="div" sx={{ paddingBottom: '30px', paddingTop: '100px', paddingX: '100px' }}>
+		<Box
+			component="div"
+			sx={{
+				paddingBottom: '30px',
+				paddingTop: '100px',
+				paddingX: '100px',
+				backgroundColor: isDark ? '#272858' : 'rgba(255, 255, 255, .7)',
+			}}
+		>
 			<Stack
 				alignItems="center"
 				direction="column"
@@ -57,7 +66,7 @@ export const Feedback = () => {
 			>
 				<Typography
 					sx={{
-						color: 'rgba(0, 0, 0, .5)',
+						color: isDark ? 'rgba(255, 255, 255, 1)' : 'rgba(0, 0, 0, .5)',
 						fontWeight: 100,
 						marginBottom: '5px',
 					}}
@@ -65,7 +74,13 @@ export const Feedback = () => {
 				>
 					IF YOU HAVE ANY FEEDBACK ABOUT OUR SERVICE, PLEASE LET US KNOW
 				</Typography>
-				<Typography sx={{ color: 'rgba(0, 0, 0, .7)', fontWeight: 100 }} variant={'h6'}>
+				<Typography
+					sx={{
+						color: isDark ? 'rgba(255, 255, 255, .7)' : 'rgba(0, 0, 0, .7)',
+						fontWeight: 100,
+					}}
+					variant={'h6'}
+				>
 					WE WOULD ❤️ LOVE TO HEAR FROM 🫵
 				</Typography>
 				<Button

@@ -15,7 +15,7 @@ export const SectionItem = ({ icon, text }: Props) => {
 					elevation={3}
 					sx={{
 						alignItems: 'center',
-						backgroundColor: (theme) => theme.palette.primary.main,
+						backgroundColor: theme => theme.palette.primary.main,
 						borderRadius: '10px',
 						color: 'white',
 						display: 'flex',

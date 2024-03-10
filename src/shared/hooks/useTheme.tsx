@@ -13,7 +13,7 @@ export const ThemeContext = createContext<IThemeContext>({
 })
 
 export const ThemeState = ({ children }: { children: React.ReactNode }) => {
-	const [isDark, setIsDark] = useState(true)
+	const [isDark, setIsDark] = useState(false)
 
 	const toggleTheme = () => {
 		setIsDark(prevState => !prevState)

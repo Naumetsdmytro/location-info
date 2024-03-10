@@ -49,7 +49,6 @@ export const login = createAsyncThunk<
 	} catch (error) {
 		if (error instanceof Error) {
 			return rejectWithValue(error.message)
-
 		} else {
 			return rejectWithValue('An unknown error occurred.')
 		}
